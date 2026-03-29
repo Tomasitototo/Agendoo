@@ -182,6 +182,147 @@ const App = () => {
           </div>
         </div>
       </section>
+      {/* SECCIÓN COMPARATIVA */}
+      <section className="bg-[#FFFFFF] py-20">
+        <div className="max-w-5xl mx-auto px-6">
+          <h2 className="text-center font-extrabold text-4xl lg:text-5xl text-gray-900 mb-12" style={{ fontFamily: "'Sora', sans-serif" }}>
+            Sin Agendoo vs. <span className="text-[#1B72F0]">Con Agendoo</span>
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            {/* CARD SIN AGENDOO */}
+            <div className="bg-gray-100 border border-gray-200 rounded-3xl p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center text-red-500">
+                  ✕
+                </div>
+                <h3 className="font-bold text-lg text-gray-700">Sin Agendoo</h3>
+              </div>
+              <ul className="space-y-4">
+                {[
+                  "Confirmás turnos uno por uno por WhatsApp",
+                  "3 de cada 10 clientes no aparecen",
+                  "10+ mensajes de WhatsApp para responder dudas",
+                  "No sabés cuánto ganaste este mes",
+                  "Agendas en papel o en la cabeza"
+                ].map((item, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <span className="text-red-400 text-lg mt-0.5 shrink-0">✕</span>
+                    <span className="text-gray-500 text-base">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* CARD CON AGENDOO */}
+            <div className="bg-[#1B72F0] rounded-3xl p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-white">
+                  ✓
+                </div>
+                <h3 className="font-bold text-lg text-white">Con Agendoo</h3>
+              </div>
+              <ul className="space-y-4">
+                {[
+                  "Tus clientes reservan solos, a cualquier hora",
+                  "Cobro de seña automático = Sin ausencias",
+                  "Gráficos y métricas con tus ingresos en tiempo real",
+                  "Calendario digital en tiempo real",
+                  "Te olvidás de contestar por WhatsApp e Instagram"
+                ].map((item, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <span className="text-white/70 text-lg mt-0.5 shrink-0">✓</span>
+                    <span className="text-white/90 text-base">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </section>
+      {/* SECCIÓN DEMOS */}
+      <section className="bg-[#FFFFFF] py-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-gray-50 border border-gray-200 rounded-3xl p-10 lg:p-14">
+            
+            {/* ENCABEZADO */}
+            <div className="mb-10">
+              <div className="bg-white border border-gray-200 rounded-full px-3 py-1 text-sm text-gray-500 inline-flex items-center gap-2 mb-4">
+                <span>🖥️</span>
+                <span>Demos en vivo</span>
+              </div>
+              <h2 className="font-extrabold text-4xl lg:text-5xl text-gray-900 mb-2" style={{ fontFamily: "'Sora', sans-serif" }}>
+                Así podría verse tu sistema
+              </h2>
+              <p className="text-gray-400 text-base max-w-xl">
+                Elegí una demo y visualizá cómo quedaría tu negocio con un sistema listo para reservar.
+              </p>
+            </div>
+
+            {/* GRID DE CARDS DE DEMOS */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {[
+                {
+                  badgeText: "Estilo urbano",
+                  title: "Demo Barbería",
+                  image: "/demos/preview-barberia.png",
+                  placeholderCss: "from-gray-800 to-gray-900",
+                  href: "#"
+                },
+                {
+                  badgeText: "Estética & Lash",
+                  title: "Demo Beauty",
+                  image: "/demos/preview-beauty.png",
+                  placeholderCss: "from-pink-900 to-gray-900",
+                  href: "#"
+                }
+              ].map((demo, index) => (
+                <a 
+                  key={index} 
+                  href={demo.href} 
+                  className={`relative overflow-hidden rounded-3xl h-80 cursor-pointer group hover:scale-[1.02] hover:shadow-xl transition-all duration-300 bg-gradient-to-br ${demo.placeholderCss}`}
+                >
+                  {/* CAPA 1 — Imagen de fondo */}
+                  <img 
+                    src={demo.image} 
+                    alt={demo.title} 
+                    className="absolute inset-0 w-full h-full object-cover z-0 opacity-80 mix-blend-overlay group-hover:opacity-100 transition-opacity duration-300" 
+                    onError={(e) => e.target.style.display = 'none'}
+                  />
+
+                  {/* CAPA 2 — Overlay degradado */}
+                  <div className="absolute inset-0 z-10 bg-gradient-to-t from-[rgba(0,0,0,0.85)] via-[rgba(0,0,0,0.2)] to-transparent pointer-events-none" />
+
+                  {/* CAPA 3 — Contenido */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 flex justify-between items-end z-20">
+                    
+                    {/* Lado izquierdo */}
+                    <div>
+                      <span className="inline-block bg-white/15 backdrop-blur-sm border border-white/20 rounded-full px-3 py-1 text-white text-xs font-medium mb-3">
+                        {demo.badgeText}
+                      </span>
+                      <h3 className="text-white font-bold text-2xl leading-tight">
+                        {demo.title}
+                      </h3>
+                    </div>
+
+                    {/* Lado derecho */}
+                    <div>
+                      <div className="bg-white text-gray-900 rounded-full px-5 py-2 font-semibold text-sm flex items-center gap-2 hover:bg-blue-50 transition-colors">
+                        Ver demo <span aria-hidden="true">&rarr;</span>
+                      </div>
+                    </div>
+
+                  </div>
+                </a>
+              ))}
+            </div>
+
+          </div>
+        </div>
+      </section>
 
       {/* FOOTER */}
       <footer id="footer" className="bg-[#0A0A0A] text-gray-400 py-8">
