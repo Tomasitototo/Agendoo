@@ -229,6 +229,7 @@ export function CinematicHero({
 
     const ctx = gsap.context(() => {
       gsap.set("#main-navbar", { opacity: 0, pointerEvents: "none" });
+      gsap.set(mockupRef.current, { rotationX: 0, rotationY: 0, rotationZ: 0 });
       gsap.set(
         ".text-track",
         { autoAlpha: 0, y: 60, scale: 0.85, filter: "blur(20px)", rotationX: -20 }
@@ -330,6 +331,14 @@ export function CinematicHero({
         className
       )}
       style={{ perspective: "1500px" }}
+      onMouseLeave={() => {
+        gsap.to(mockupRef.current, {
+          rotationY: 0,
+          rotationX: 0,
+          ease: "power3.out",
+          duration: 1.2,
+        });
+      }}
       {...props}>
       <style dangerouslySetInnerHTML={{ __html: INJECTED_STYLES }} />
       <div className="film-grain" aria-hidden="true" />
@@ -371,18 +380,18 @@ export function CinematicHero({
         </p>
         <div className="flex flex-col sm:flex-row gap-6">
           <a
-            href="#"
+            href="#precios"
             className="btn-modern-light flex items-center justify-center gap-3 px-8 py-4 rounded-[1.25rem] group focus:outline-none focus:ring-2 focus:ring-[#1B72F0] focus:ring-offset-2">
             <div className="text-left">
               <div className="text-[10px] font-bold tracking-wider text-neutral-500 uppercase mb-[-2px]">DESDE USD $40/MES</div>
-              <div className="text-xl font-bold leading-none tracking-tight">Empezá gratis</div>
+              <div className="text-xl font-bold leading-none tracking-tight">Comenzar ahora</div>
             </div>
             <svg className="w-6 h-6 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
           </a>
           <a
-            href="#"
+            href="#demos"
             className="btn-modern-dark flex items-center justify-center gap-3 px-8 py-4 rounded-[1.25rem] group focus:outline-none focus:ring-2 focus:ring-[#1B72F0] focus:ring-offset-2 focus:ring-offset-background">
             <svg className="w-5 h-5 text-white transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="currentColor">
               <path d="M8 5v14l11-7z"/>
@@ -419,7 +428,8 @@ export function CinematicHero({
                 {/* The iPhone Bezel */}
                 <div
                   ref={mockupRef}
-                  className="relative w-[280px] h-[580px] rounded-[3rem] iphone-bezel flex flex-col will-change-transform transform-style-3d">
+                  className="relative w-[280px] h-[580px] rounded-[3rem] iphone-bezel flex flex-col will-change-transform transform-style-3d"
+                  style={{ transformOrigin: "center center", transform: "rotateX(0deg) rotateY(0deg)" }}>
                   {/* Physical Hardware Buttons */}
                   <div
                     className="absolute top-[120px] -left-[3px] w-[3px] h-[25px] hardware-btn rounded-l-md z-0"
