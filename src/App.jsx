@@ -452,9 +452,9 @@ const LandingPage = () => {
                 {
                   badgeText: "Estilo urbano",
                   title: "Demo Barbería",
-                  image: "/preview-barberia.webp",
+                  image: "/demos/preview-barberia.png",
                   placeholderCss: "from-gray-800 to-gray-900",
-                  href: "#"
+                  href: "/demo-barberia"
                 },
                 {
                   badgeText: "Estética & Lash",
@@ -467,18 +467,18 @@ const LandingPage = () => {
                 <a
                   key={index}
                   href={demo.href}
-                  className={`relative overflow-hidden rounded-3xl h-80 cursor-pointer group hover:scale-[1.02] hover:shadow-xl transition-all duration-300 bg-gradient-to-br ${demo.placeholderCss}`}
+                  className="relative overflow-hidden rounded-3xl h-80 cursor-pointer group hover:scale-[1.02] hover:shadow-xl transition-all duration-300 bg-gray-100"
                 >
                   {/* CAPA 1 — Imagen de fondo */}
                   <img
                     src={demo.image}
                     alt={demo.title}
-                    className="absolute inset-0 w-full h-full object-cover z-0 opacity-80 mix-blend-overlay group-hover:opacity-100 transition-opacity duration-300"
+                    className="absolute inset-0 w-full h-full object-cover z-0 opacity-100 transition-opacity duration-300"
                     onError={(e) => e.target.style.display = 'none'}
                   />
 
-                  {/* CAPA 2 — Overlay degradado */}
-                  <div className="absolute inset-0 z-10 bg-gradient-to-t from-[rgba(0,0,0,0.85)] via-[rgba(0,0,0,0.2)] to-transparent pointer-events-none" />
+                  {/* CAPA 2 — Overlay degradado (más sutil) */}
+                  <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
                   {/* CAPA 3 — Contenido */}
                   <div className="absolute bottom-0 left-0 right-0 p-6 flex justify-between items-end z-20">
