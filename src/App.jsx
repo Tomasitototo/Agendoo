@@ -13,6 +13,7 @@ const PlaceholderImage = ({ description }) => (
 // Navbar component with responsive hamburger
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [logoError, setLogoError] = useState(false);
   const toggle = () => setOpen(!open);
   const handleLinkClick = (e, target) => {
     e.preventDefault();
@@ -21,11 +22,18 @@ const Navbar = () => {
     setOpen(false);
   };
   return (
-    <nav id="main-navbar" className="fixed top-0 left-0 w-full bg-white border-b border-gray-200 z-50 shadow-sm">
+    <nav id="main-navbar" className="fixed top-0 left-0 w-full bg-white border-b border-gray-200 z-50 shadow-sm opacity-0 invisible pointer-events-none transition-none">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         <a href="#" className="flex items-center space-x-2" onClick={(e) => handleLinkClick(e, "#hero")}>
-          <img src="/src/assets/Logo.png" alt="Agendoo" className="h-8 w-8" />
-          <span className="font-extrabold text-xl" style={{ fontFamily: "'Sora', sans-serif" }}>Agendoo</span>
+          {!logoError && (
+            <img 
+              src="/Logo.png" 
+              alt="Logo" 
+              className="h-8 w-auto object-contain" 
+              onError={() => setLogoError(true)}
+            />
+          )}
+          <span className="font-extrabold text-xl text-gray-900" style={{ fontFamily: "'Sora', sans-serif" }}>Agendoo</span>
         </a>
         <div className="hidden md:flex space-x-6 items-center text-sm font-medium">
           <a href="#ideal-para" onClick={(e) => handleLinkClick(e, "#ideal-para")} className="text-gray-600 hover:text-[#1B72F0] transition-colors">Para quién</a>

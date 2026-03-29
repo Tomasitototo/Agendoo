@@ -228,7 +228,6 @@ export function CinematicHero({
     const isMobile = window.innerWidth < 768;
 
     const ctx = gsap.context(() => {
-      gsap.set("#main-navbar", { opacity: 0, pointerEvents: "none" });
       gsap.set(mockupRef.current, { rotationX: 0, rotationY: 0, rotationZ: 0 });
       gsap.set(
         ".text-track",
@@ -254,9 +253,7 @@ export function CinematicHero({
           end: "+=7000",
           pin: true,
           scrub: 1,
-          anticipatePin: 1,
-          onLeave: () => gsap.to("#main-navbar", { opacity: 1, pointerEvents: "auto", duration: 0.5 }),
-          onEnterBack: () => gsap.to("#main-navbar", { opacity: 0, pointerEvents: "none", duration: 0.5 })
+          anticipatePin: 1
         },
       });
 
@@ -321,8 +318,45 @@ export function CinematicHero({
     }, containerRef);
 
     return () => ctx.revert();
-  }, [metricValue]); 
+  }, [metricValue]);
 
+  // 3. Standalone Navbar Visibility Hook
+  useEffect(() => {
+    const heroEl = containerRef.current;
+    if (!heroEl) return;
+
+    // Navbar invisible al inicio
+    gsap.set("#main-navbar", { 
+      opacity: 0, 
+      pointerEvents: "none",
+      visibility: "hidden"
+    });
+
+    // ScrollTrigger separado solo para el navbar
+    const navTrigger = ScrollTrigger.create({
+      trigger: heroEl,
+      start: "top top",
+      end: "bottom top",
+      onLeave: () => {
+        gsap.to("#main-navbar", { 
+          opacity: 1, 
+          pointerEvents: "auto",
+          visibility: "visible",
+          duration: 0.4
+        });
+      },
+      onEnterBack: () => {
+        gsap.to("#main-navbar", { 
+          opacity: 0, 
+          pointerEvents: "none",
+          visibility: "hidden",
+          duration: 0.3
+        });
+      }
+    });
+
+    return () => navTrigger.kill();
+  }, []);
   return (
     <div
       ref={containerRef}
