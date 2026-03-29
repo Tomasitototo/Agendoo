@@ -227,6 +227,36 @@ export function CinematicHero({
   useEffect(() => {
     const isMobile = window.innerWidth < 768;
 
+    if (isMobile) {
+      // En mobile: mostrar directamente el estado
+      // final (la card expandida con el contenido)
+      // sin animación de scroll
+      gsap.set(".main-card", { 
+        y: 0, 
+        width: "100%", 
+        height: "100vh",
+        borderRadius: "0px",
+        autoAlpha: 1
+      });
+      gsap.set([
+        ".mockup-scroll-wrapper",
+        ".card-left-text",
+        ".floating-badge",
+        ".phone-widget"
+      ], { autoAlpha: 1 });
+      gsap.set(".hero-text-wrapper", { autoAlpha: 0 });
+      gsap.set(".cta-wrapper", { autoAlpha: 0 });
+      
+      // Mostrar navbar inmediatamente en mobile
+      gsap.set("#main-navbar", { 
+        opacity: 1, 
+        pointerEvents: "auto", 
+        visibility: "visible"
+      });
+      
+      return; // No crear el ScrollTrigger en mobile
+    }
+
     const ctx = gsap.context(() => {
       gsap.set(mockupRef.current, { rotationX: 0, rotationY: 0, rotationZ: 0 });
       gsap.set(
