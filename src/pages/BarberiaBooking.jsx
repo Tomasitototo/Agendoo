@@ -27,9 +27,9 @@ const BarberiaBooking = () => {
 
   const profesionales = [
     { id: 1, nombre: "Cualquiera", descripcion: "Te asignamos el primero disponible", foto: null, icono: "🎲" },
-    { id: 2, nombre: "Marcos", foto: "/Marcos.png" },
-    { id: 3, nombre: "Diego", foto: "/Diego.png" },
-    { id: 4, nombre: "Sofia", foto: "/Sofia.png" }
+    { id: 2, nombre: "Marcos", foto: "/Marcos.webp" },
+    { id: 3, nombre: "Diego", foto: "/Diego.webp" },
+    { id: 4, nombre: "Sofia", foto: "/Sofia.webp" }
   ];
 
   const servicios = [
@@ -84,7 +84,7 @@ const BarberiaBooking = () => {
       {/* SECCIÓN 1 — NAVBAR (Exactamente igual a DemoBarberia) */}
       <nav className="bg-[#2C1810] px-6 py-4 flex justify-between items-center sticky top-0 z-50 shadow-lg">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate('/demo-barberia')}>
-          <img src="/logo-barberia.png" alt="Logo" className="w-10 h-10 object-contain" />
+          <img src="/logo-barberia.webp" alt="Logo" className="w-10 h-10 object-contain" />
           <span className="text-white font-semibold text-lg font-['Playfair_Display'] tracking-wide">Barbería Monarca</span>
         </div>
         
@@ -120,7 +120,7 @@ const BarberiaBooking = () => {
                 className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-[#2C1810] border-4 border-white shadow-2xl overflow-hidden flex items-center justify-center font-bold text-white text-3xl"
               >
                 <img 
-                  src="/logo-barberia.png" 
+                  src="/logo-barberia.webp" 
                   alt="Logo"
                   className="w-full h-full object-cover scale-110"
                 />

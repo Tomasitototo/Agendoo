@@ -31,7 +31,7 @@ const DemoBeauty = () => {
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm overflow-hidden p-1.5">
             <img 
-              src="/LogoDemoBeauty.png" 
+              src="/LogoDemoBeauty.webp" 
               alt="Logo Aster Beauty"
               className="w-full h-full object-contain"
             />
@@ -77,7 +77,7 @@ const DemoBeauty = () => {
                 className="w-24 h-24 rounded-2xl bg-white border-4 border-white shadow-2xl overflow-hidden flex items-center justify-center font-bold text-white text-3xl"
               >
                 <img 
-                  src="/LogoDemoBeauty.png" 
+                  src="/LogoDemoBeauty.webp" 
                   alt="Logo Aster Beauty"
                   className="w-full h-full object-cover"
                 />

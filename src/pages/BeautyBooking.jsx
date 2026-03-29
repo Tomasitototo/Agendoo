@@ -82,7 +82,7 @@ const BeautyBooking = () => {
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate('/demo-beauty')}>
           <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm overflow-hidden p-1.5">
             <img 
-              src="/LogoDemoBeauty.png" 
+              src="/LogoDemoBeauty.webp" 
               alt="Logo"
               className="w-full h-full object-contain"
             />
@@ -103,7 +103,7 @@ const BeautyBooking = () => {
             <div className="absolute -bottom-10 left-6 z-10">
               <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-white border-4 border-white shadow-2xl overflow-hidden flex items-center justify-center">
                 <img 
-                  src="/LogoDemoBeauty.png" 
+                  src="/LogoDemoBeauty.webp" 
                   alt="Logo"
                   className="w-full h-full object-cover"
                 />
@@ -273,7 +273,7 @@ const BeautyBooking = () => {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-md flex items-center justify-center p-4">
             <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="bg-white rounded-[2.5rem] p-12 text-center max-w-sm w-full shadow-2xl border border-gray-100">
               <div className="w-20 h-20 bg-pink-50 rounded-2xl overflow-hidden flex items-center justify-center mx-auto mb-6">
-                <img src="/LogoDemoBeauty.png" alt="Logo" className="w-full h-full object-contain" />
+                <img src="/LogoDemoBeauty.webp" alt="Logo" className="w-full h-full object-contain" />
               </div>
               <h2 className="font-['Cormorant_Garamond'] italic font-bold text-3xl text-gray-900 mb-4">¡Turno confirmado!</h2>
               <p className="text-[#6B5744] text-sm mb-10">Te enviamos la confirmación por email. ¡Nos vemos en <strong>Aster Beauty</strong>!</p>

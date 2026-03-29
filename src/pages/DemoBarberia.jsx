@@ -30,7 +30,7 @@ const DemoBarberia = () => {
       <nav className="bg-[#2C1810] px-6 py-4 flex justify-between items-center sticky top-0 z-50 shadow-lg">
         <div className="flex items-center gap-3">
           <img 
-            src="/logo-barberia.png" 
+            src="/logo-barberia.webp" 
             alt="Logo Barbería Monarca"
             className="w-10 h-10 object-contain"
           />
@@ -77,7 +77,7 @@ const DemoBarberia = () => {
                 className="w-24 h-24 rounded-2xl bg-[#2C1810] border-4 border-white shadow-2xl overflow-hidden flex items-center justify-center font-bold text-white text-3xl"
               >
                 <img 
-                  src="/logo-barberia.png" 
+                  src="/logo-barberia.webp" 
                   alt="Logo"
                   className="w-full h-full object-cover scale-110"
                 />

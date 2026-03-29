@@ -454,14 +454,14 @@ const LandingPage = () => {
                 {
                   badgeText: "Estilo urbano",
                   title: "Demo Barbería",
-                  image: "/demos/preview-barberia.png",
+                  image: "/demos/preview-barberia.webp",
                   placeholderCss: "from-gray-800 to-gray-900",
                   href: "/demo-barberia"
                 },
                 {
                   badgeText: "Estética & Lash",
                   title: "Demo Beauty",
-                  image: "/demos/preview-beauty.png",
+                  image: "/demos/preview-beauty.webp",
                   placeholderCss: "from-pink-900 to-gray-900",
                   href: "/demo-beauty"
                 }
