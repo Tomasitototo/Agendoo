@@ -27,7 +27,7 @@ const Navbar = () => {
         <a href="#" className="flex items-center space-x-2" onClick={(e) => handleLinkClick(e, "#hero")}>
           {!logoError && (
             <img 
-              src="/Logo.png" 
+              src="/Logo.webp" 
               alt="Logo" 
               className="h-8 w-auto object-contain" 
               onError={() => setLogoError(true)}
@@ -687,14 +687,14 @@ const App = () => {
                 {
                   badgeText: "Estilo urbano",
                   title: "Demo Barbería",
-                  image: "/demos/preview-barberia.png",
+                  image: "/preview-barberia.webp",
                   placeholderCss: "from-gray-800 to-gray-900",
                   href: "#"
                 },
                 {
                   badgeText: "Estética & Lash",
                   title: "Demo Beauty",
-                  image: "/demos/preview-beauty.png",
+                  image: "/preview-beauty.webp",
                   placeholderCss: "from-pink-900 to-gray-900",
                   href: "#"
                 }
@@ -795,7 +795,7 @@ const App = () => {
           {/* LADO IZQUIERDO */}
           <div className="mb-10 md:mb-0">
             <div className="flex items-center gap-3 mb-3">
-              <img src="/src/assets/Logo.png" alt="Agendoo" className="h-8" />
+              <img src="/Logo.webp" alt="Agendoo" className="h-8" />
               <div className="text-white font-bold text-xl" style={{ fontFamily: "'Sora', sans-serif" }}>Agendoo</div>
             </div>
             <p className="text-white/40 text-sm mt-2 max-w-xs">

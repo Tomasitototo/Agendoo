@@ -11,11 +11,12 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 
-import imgMercadoPago from "@/assets/Mercado Pago Logo.png";
-import imgWhatsApp from "@/assets/Whatsapp Logo.png";
-import imgInstagram from "@/assets/Instagram Logo.png";
-import imgCalendar from "@/assets/Calendar Logo.png";
-import imgOpenAI from "@/assets/OpenAI Logo.png";
+// Logos are now pulled from public folder with .webp extension
+const imgMercadoPago = "/Mercado Pago Logo.webp";
+const imgWhatsApp = "/Whatsapp Logo.webp";
+const imgInstagram = "/Instagram Logo.webp";
+const imgCalendar = "/Calendar Logo.webp";
+const imgOpenAI = "/OpenAI Logo.webp";
 
 const Logos3 = ({
   heading = "Funciona con las herramientas que ya usás",

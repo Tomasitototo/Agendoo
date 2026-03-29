@@ -4,12 +4,13 @@ import { useEffect, useState } from "react";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import AutoScroll from "embla-carousel-auto-scroll";
 
-import imgMercadoPago from "@/assets/Mercado Pago Logo.png";
-import imgWhatsApp from "@/assets/Whatsapp Logo.png";
-import imgInstagram from "@/assets/Instagram Logo.png";
-import imgCalendar from "@/assets/Calendar Logo.png";
-import imgOpenAI from "@/assets/OpenAI Logo.png";
-import imgGmail from "@/assets/Gmail Logo.png";
+// Logos are now pulled from public folder with .webp extension
+const imgMercadoPago = "/Mercado Pago Logo.webp";
+const imgWhatsApp = "/Whatsapp Logo.webp";
+const imgInstagram = "/Instagram Logo.webp";
+const imgCalendar = "/Calendar Logo.webp";
+const imgOpenAI = "/OpenAI Logo.webp";
+const imgGmail = "/Gmail Logo.webp";
 
 export const AnimatedCarousel = ({
   title = "Funciona con las herramientas que ya usás",
