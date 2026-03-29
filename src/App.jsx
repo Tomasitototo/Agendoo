@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import { CinematicHero } from "./components/cinematic-landing-hero";
+import { AnimatedCarousel } from "./components/logo-carousel";
 
 // Utility component for placeholder images
 const PlaceholderImage = ({ description }) => (
@@ -18,7 +20,7 @@ const Navbar = () => {
     setOpen(false);
   };
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white border-b border-gray-200 z-50 shadow-sm">
+    <nav id="main-navbar" className="fixed top-0 left-0 w-full bg-white border-b border-gray-200 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         <a href="#" className="flex items-center space-x-2" onClick={(e) => handleLinkClick(e, "#hero")}> 
           <img src="/src/assets/Logo.png" alt="Agendoo" className="h-8 w-8" />
@@ -89,27 +91,7 @@ const FAQItem = ({ question, answer }) => {
 };
 
 const App = () => {
-  // Refs for animation sections
-  const heroRef = useRef(null);
-  const dolorRef = useRef(null);
-  const propuestaRef = useRef(null);
-  const comoFuncionaRef = useRef(null);
-  const featuresRef = useRef(null);
-  const idealParaRef = useRef(null);
-  const preciosRef = useRef(null);
-  const faqRef = useRef(null);
-  const ctaRef = useRef(null);
-
-  // Apply fade-in to each section
-  useFadeIn(heroRef);
-  useFadeIn(dolorRef);
-  useFadeIn(propuestaRef);
-  useFadeIn(comoFuncionaRef);
-  useFadeIn(featuresRef);
-  useFadeIn(idealParaRef);
-  useFadeIn(preciosRef);
-  useFadeIn(faqRef);
-  useFadeIn(ctaRef);
+  // Secciones nuevas irán aquí...
 
   const scrollToPrecios = (e) => {
     e.preventDefault();
@@ -124,240 +106,79 @@ const App = () => {
       <Navbar />
 
       {/* HERO */}
-      <section id="hero" ref={heroRef} className="pt-24 bg-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col-reverse md:flex-row items-center">
-          <div className="md:w-1/2 space-y-6">
-            <span className="inline-block bg-[#1B72F0] text-white text-xs font-semibold px-3 py-1 rounded-full">✦ Sistema de turnos online</span>
-            <h1 className="text-4xl md:text-5xl font-extrabold text-[#0A0A0A]" style={{ fontFamily: "'Sora', sans-serif" }}>
-              Dejá de perder clientes por turnos que no llegan.
-            </h1>
-            <p className="text-gray-700 max-w-md">
-              Agendoo automatiza tus reservas, cobros y recordatorios para que vos te enfocés en tu negocio.
-            </p>
-            <div className="flex space-x-4">
-              <button className="bg-[#1B72F0] text-white px-6 py-2 rounded-xl hover:bg-[#155ec9] transition-colors" onClick={scrollToPrecios}>
-                Ver planes →
-              </button>
-              <button className="border border-[#1B72F0] text-[#1B72F0] px-6 py-2 rounded-xl hover:bg-[#1B72F0]/10 transition-colors" onClick={scrollToPrecios}>
-                Hablar con un asesor
-              </button>
-            </div>
-          </div>
-          <div className="md:w-1/2 mb-8 md:mb-0">
-            <PlaceholderImage description="mockup del dashboard" />
-          </div>
-        </div>
-      </section>
+      <div id="hero">
+        <CinematicHero
+          brandName="Agendoo"
+          tagline1="Dejá de perder turnos"
+          tagline2="que no llegan."
+          cardHeading="Tu negocio trabaja solo."
+          cardDescription={
+            <>
+              <span className="text-white font-semibold">Agendoo</span> automatiza 
+              tus reservas, cobros y recordatorios para que vos te enfocés 
+              en lo que importa: atender a tus clientes.
+            </>
+          }
+          metricValue={247}
+          metricLabel="Turnos este mes"
+          ctaHeading="Empezá esta semana."
+          ctaDescription="Configuramos todo por vos. Sin tecnicismos, sin complicaciones. Tu sistema listo en 5 días."
+        />
+      </div>
 
-      {/* SECCIÓN DOLOR */}
-      <section id="dolor" ref={dolorRef} className="bg-[#F8FAFC] py-16">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl font-bold text-[#0A0A0A] mb-8">Hoy perdés horas por semana coordinando turnos por WhatsApp.</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {["Clientes que no aparecen y no avisaron", "Turnos anotados en papeles o Excel", "Cobros olvidados y sin confirmación"].map((txt, i) => (
-              <div key={i} className="bg-white p-6 rounded-2xl shadow-md flex flex-col items-center">
-                <svg className="h-12 w-12 text-[#1B72F0] mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-3-3v6" /></svg>
-                <p className="text-gray-700">{txt}</p>
+      {/* LOGOS INTEGRADORES */}
+      <AnimatedCarousel />
+
+      {/* NUEVAS SECCIONES SE AÑADIRÁN AQUÍ */}
+      
+      {/* SECCIÓN IDEAL PARA */}
+      <section id="ideal-para" className="bg-[#FFFFFF] py-20 px-4 sm:px-6">
+        <div className="bg-gray-50 border border-gray-200 rounded-[2rem] p-10 lg:p-14 max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12">
+            
+            {/* COLUMNA IZQUIERDA */}
+            <div>
+              <div className="border border-gray-200 bg-gray-50 rounded-full px-4 py-1.5 text-base text-gray-500 inline-flex items-center gap-2 mb-6 shadow-sm">
+                <span>📅</span>
+                <span>Cualquier rubro con turnos</span>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+              
+              <h2 className="font-extrabold text-5xl lg:text-6xl text-gray-900 leading-tight mb-14" style={{ fontFamily: "'Sora', sans-serif" }}>
+                Agendoo es ideal para:
+              </h2>
+              
+              <div className="bg-white border border-gray-200 rounded-2xl px-5 py-3.5 inline-flex items-center gap-3 text-gray-600 text-base shadow-sm">
+                <span className="text-xl">💬</span>
+                <span className="font-medium">Si atendés clientes con turno, esto está hecho para vos.</span>
+              </div>
+            </div>
 
-      {/* SECCIÓN PROPUESTA */}
-      <section id="propuesta" ref={propuestaRef} className="bg-[#0A0A0A] text-white py-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center">
-          <div className="md:w-1/2 space-y-4">
-            <h2 className="text-3xl font-extrabold" style={{ fontFamily: "'Sora', sans-serif" }}>Tus clientes reservan solos, 24/7, desde el celular.</h2>
-            <p className="text-gray-300 max-w-md">Agendoo simplifica la gestión de turnos, pagos y recordatorios, permitiendo que tu negocio funcione sin interrupciones.</p>
-            <ul className="space-y-2">
+            {/* COLUMNA DERECHA */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 auto-rows-max">
               {[
-                "Reserva online con pago en el momento",
-                "Confirmación automática por email",
-                "Recordatorios 24hs antes por WhatsApp",
-                "Sin llamadas ni mensajes manuales"
-              ].map((feat, i) => (
-                <li key={i} className="flex items-center">
-                  <svg className="h-5 w-5 text-[#1B72F0] mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                  <span>{feat}</span>
-                </li>
+                { icon: "✂️", name: "Barberías" },
+                { icon: "💇", name: "Peluquerías" },
+                { icon: "💆", name: "Centros estéticos" },
+                { icon: "🦷", name: "Consultorios odontológicos" },
+                { icon: "🐾", name: "Veterinarias" },
+              ].map((rubro, index) => (
+                <div key={index} className="bg-white border border-gray-200 rounded-2xl p-4 flex items-center gap-4 hover:shadow-lg hover:scale-[1.02] hover:-translate-y-1 cursor-pointer transition-all duration-300 h-24">
+                  <div className="bg-gray-100 rounded-xl w-14 h-14 flex items-center justify-center text-3xl shrink-0">
+                    {rubro.icon}
+                  </div>
+                  <span className="text-gray-800 font-semibold text-sm sm:text-base leading-tight">{rubro.name}</span>
+                </div>
               ))}
-            </ul>
-          </div>
-          <div className="md:w-1/2 mt-8 md:mt-0">
-            <PlaceholderImage description="mockup móvil de reserva" />
-          </div>
-        </div>
-      </section>
-
-      {/* CÓMO FUNCIONA */}
-      <section id="como-funciona" ref={comoFuncionaRef} className="bg-white py-16">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl font-bold mb-8">En 3 pasos, tu negocio listo.</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[{
-              title: "Configuramos tu sistema",
-              desc: "Personalizamos colores, servicios y horarios según tu negocio."
-            }, {
-              title: "Compartís el link de reserva",
-              desc: "Lo ponés en Instagram, WhatsApp o donde quieras."
-            }, {
-              title: "Los turnos llegan solos",
-              desc: "Tu cliente elige, paga y recibe confirmación automática."
-            }].map((step, i) => (
-              <div key={i} className="bg-gray-50 p-6 rounded-2xl shadow-md">
-                <div className="text-4xl font-extrabold text-[#1B72F0] mb-4">{i + 1}</div>
-                <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                <p className="text-gray-600">{step.desc}</p>
+              
+              {/* Tarjeta Destacada */}
+              <div className="bg-blue-50 border border-blue-100 rounded-2xl p-4 flex items-center gap-4 hover:shadow-lg hover:scale-[1.02] hover:-translate-y-1 cursor-pointer transition-all duration-300 h-24">
+                <div className="bg-blue-100 rounded-xl w-14 h-14 flex items-center justify-center text-3xl shrink-0">
+                  ✨
+                </div>
+                <span className="text-[#1B72F0] font-semibold text-sm sm:text-base leading-tight">Y cualquier negocio que trabaje con turnos</span>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            </div>
 
-      {/* FEATURES DESTACADAS */}
-      <section id="features" ref={featuresRef} className="py-16">
-        {/* Bloque A */}
-        <div className="bg-white py-12">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center">
-            <div className="md:w-1/2 mb-8 md:mb-0">
-              <PlaceholderImage description="pantalla de pago con Mercado Pago" />
-            </div>
-            <div className="md:w-1/2 space-y-4">
-              <h3 className="text-2xl font-extrabold" style={{ fontFamily: "'Sora', sans-serif" }}>Cobros online para eliminar ausencias</h3>
-              <p className="text-gray-700">Los negocios que cobran seña reducen hasta un 60% las ausencias. Con Agendoo, el cliente paga en el momento o pierde el turno.</p>
-            </div>
-          </div>
-        </div>
-        {/* Bloque B */}
-        <div className="bg-[#0A0A0A] text-white py-12">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row-reverse items-center">
-            <div className="md:w-1/2 mb-8 md:mb-0">
-              <PlaceholderImage description="conversación WhatsApp con IA" />
-            </div>
-            <div className="md:w-1/2 space-y-4">
-              <span className="inline-block bg-[#1B72F0] text-white text-xs font-semibold px-2 py-1 rounded-full">Solo en Plan Premium</span>
-              <h3 className="text-2xl font-extrabold" style={{ fontFamily: "'Sora', sans-serif" }}>Agente de WhatsApp con IA que agenda por vos</h3>
-              <p className="text-gray-300">Tu negocio responde preguntas y agenda turnos automáticamente por WhatsApp, incluso a las 3am.</p>
-            </div>
-          </div>
-        </div>
-        {/* Bloque C */}
-        <div className="bg-white py-12">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center">
-            <div className="md:w-1/2 mb-8 md:mb-0">
-              <PlaceholderImage description="panel de estadísticas" />
-            </div>
-            <div className="md:w-1/2 space-y-4">
-              <span className="inline-block bg-[#1B72F0] text-white text-xs font-semibold px-2 py-1 rounded-full">Solo en Plan Premium</span>
-              <h3 className="text-2xl font-extrabold" style={{ fontFamily: "'Sora', sans-serif" }}>Estadísticas para tomar decisiones</h3>
-              <p className="text-gray-700">Visualizá tus ingresos, servicios más solicitados y horarios pico en un dashboard claro. Exportá todo a Excel.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* IDEAL PARA */}
-      <section id="ideal-para" ref={idealParaRef} className="bg-[#F8FAFC] py-16">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl font-bold mb-8">Agendoo es ideal para:</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-            {["✂️ Barberías", "💅 Centros estéticos", "🏥 Consultorios", "💆 Spas y masajes", "🎓 Profesores y coaches", "🐾 Veterinarias"].map((item, i) => (
-              <div key={i} className="bg-white p-4 rounded-2xl shadow-md flex flex-col items-center">
-                <span className="text-3xl mb-2">{item.split(' ')[0]}</span>
-                <span className="text-gray-800">{item.split(' ').slice(1).join(' ')}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* PRECIOS */}
-      <section id="precios" ref={preciosRef} className="bg-white py-16">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl font-bold mb-4">Elegí el plan de tu negocio</h2>
-          <p className="text-gray-600 mb-12">Precios en USD. Instalación única + mensualidad.</p>
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Básico */}
-            <div className="border border-gray-200 rounded-2xl p-6 shadow-sm">
-              <span className="inline-block bg-gray-100 text-gray-800 text-xs font-semibold px-2 py-1 rounded-full mb-2">BÁSICO</span>
-              <div className="text-3xl font-extrabold text-[#0A0A0A] mb-2">$400 <span className="text-base font-medium text-gray-600">setup</span></div>
-              <div className="text-xl font-medium text-gray-800 mb-4">$40 /mes</div>
-              <ul className="text-left space-y-2 mb-6 text-gray-700">
-                {[
-                  "Reserva online 24/7",
-                  "Calendario con disponibilidad en tiempo real",
-                  "Pagos con Mercado Pago",
-                  "Temporizador de reserva (5 min para pagar)",
-                  "Emails automáticos de confirmación",
-                  "Sistema de descuentos y promociones",
-                  "Bloqueo de fechas (vacaciones, feriados)",
-                  "Panel de administración completo",
-                  "Diseño personalizado con tu marca",
-                  "Dominio personalizado + SSL",
-                  "Soporte por WhatsApp en horario laboral"
-                ].map((feat, i) => (
-                  <li key={i} className="flex items-center">
-                    <svg className="h-4 w-4 text-[#1B72F0] mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                    {feat}
-                  </li>
-                ))}
-              </ul>
-              <button className="border border-[#1B72F0] text-[#1B72F0] px-4 py-2 rounded-xl hover:bg-[#1B72F0]/10 transition-colors w-full" onClick={scrollToPrecios}>Consultar</button>
-            </div>
-            {/* Premium */}
-            <div className="border-2 border-[#1B72F0] rounded-2xl p-6 shadow-lg">
-              <span className="inline-block bg-[#1B72F0] text-white text-xs font-semibold px-2 py-1 rounded-full mb-2">PREMIUM</span>
-              <div className="text-3xl font-extrabold text-[#0A0A0A] mb-2">$600 <span className="text-base font-medium text-gray-600">setup</span></div>
-              <div className="text-xl font-medium text-gray-800 mb-4">$70 /mes</div>
-              <p className="text-gray-700 mb-4">Todo lo del Plan Básico, más:</p>
-              <ul className="text-left space-y-2 mb-6 text-gray-700">
-                {[
-                  "Multi-profesional (varios empleados)",
-                  "Sistema de usuarios con historial",
-                  "Programa de fidelización con puntos",
-                  "Gestión de inventario con alertas de stock",
-                  "Estadísticas completas + exportación a Excel",
-                  "Agente de WhatsApp con IA (OpenAI)",
-                  "Panel de chats de WhatsApp en el dashboard",
-                  "Turnos por WhatsApp identificados visualmente",
-                  "Soporte prioritario 7 días/semana"
-                ].map((feat, i) => (
-                  <li key={i} className="flex items-center">
-                    <svg className="h-4 w-4 text-[#1B72F0] mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                    {feat}
-                  </li>
-                ))}
-              </ul>
-              <button className="bg-[#1B72F0] text-white px-4 py-2 rounded-xl hover:bg-[#155ec9] transition-colors w-full" onClick={scrollToPrecios}>Quiero el Premium</button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section id="faq" ref={faqRef} className="bg-[#F8FAFC] py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-center mb-8">Preguntas frecuentes</h2>
-          <div className="space-y-4">
-            <FAQItem question="¿En cuánto tiempo está listo mi sistema?" answer="En aproximadamente 5 a 7 días hábiles tu sistema está configurado y listo para recibir reservas." />
-            <FAQItem question="¿Qué necesito para empezar?" answer="Solo tu logo, colores del negocio, lista de servicios y precios. Nosotros nos encargamos del resto." />
-            <FAQItem question="¿Funciona con Mercado Pago?" answer="Sí, la integración con Mercado Pago está incluida en ambos planes." />
-            <FAQItem question="¿Puedo tener varios empleados o profesionales?" answer="Sí, el Plan Premium incluye gestión multi-profesional donde cada uno tiene sus propios horarios." />
-            <FAQItem question="¿Qué pasa si tengo un problema técnico?" answer="Ofrecemos soporte por WhatsApp. El Plan Básico en horario laboral y el Premium los 7 días." />
-            <FAQItem question="¿Puedo cambiar de plan después?" answer="Sí, podés hacer upgrade de Básico a Premium cuando quieras, abonando la diferencia." />
-          </div>
-        </div>
-      </section>
-
-      {/* CTA FINAL */}
-      <section id="cta-final" ref={ctaRef} className="bg-[#0A0A0A] text-white py-20">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-4xl font-extrabold mb-4" style={{ fontFamily: "'Sora', sans-serif" }}>Tu primer turno online puede ser esta semana.</h2>
-          <p className="text-gray-300 mb-8">Configuramos todo por vos. Sin tecnicismos, sin complicaciones.</p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <button className="bg-[#1B72F0] text-white px-6 py-3 rounded-xl hover:bg-[#155ec9] transition-colors" onClick={scrollToPrecios}>Quiero mi sistema →</button>
-            <a href="https://wa.me/TUNUMERO?text=Hola,%20quiero%20más%20info%20sobre%20Agendoo" className="border border-white text-white px-6 py-3 rounded-xl hover:bg-white hover:text-[#0A0A0A] transition-colors" target="_blank" rel="noopener noreferrer">Hablar por WhatsApp</a>
           </div>
         </div>
       </section>
