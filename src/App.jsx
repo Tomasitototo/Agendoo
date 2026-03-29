@@ -5,6 +5,8 @@ import { AnimatedCard } from "./components/AnimatedCard";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DemoBarberia from "./pages/DemoBarberia";
 import BarberiaBooking from "./pages/BarberiaBooking";
+import DemoBeauty from "./pages/DemoBeauty";
+import BeautyBooking from "./pages/BeautyBooking";
 
 const PricingSection = lazy(() => import("./components/PricingSection"));
 const LogosCarousel = lazy(() => import("./components/LogosCarousel"));
@@ -459,9 +461,9 @@ const LandingPage = () => {
                 {
                   badgeText: "Estética & Lash",
                   title: "Demo Beauty",
-                  image: "/preview-beauty.webp",
+                  image: "/demos/preview-beauty.png",
                   placeholderCss: "from-pink-900 to-gray-900",
-                  href: "#"
+                  href: "/demo-beauty"
                 }
               ].map((demo, index) => (
                 <a
@@ -619,6 +621,8 @@ const App = () => {
         <Route path="/" element={<LandingPage />} />
         <Route path="/demo-barberia" element={<DemoBarberia />} />
         <Route path="/demo-barberia/turnos" element={<BarberiaBooking />} />
+        <Route path="/demo-beauty" element={<DemoBeauty />} />
+        <Route path="/demo-beauty/turnos" element={<BeautyBooking />} />
       </Routes>
     </BrowserRouter>
   );
