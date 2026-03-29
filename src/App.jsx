@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { motion, useMotionValue, useSpring, useTransform, animate, AnimatePresence } from "framer-motion";
 import { CinematicHero } from "./components/cinematic-landing-hero";
 import { AnimatedCard } from "./components/AnimatedCard";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import DemoBarberia from "./pages/DemoBarberia";
+import BarberiaBooking from "./pages/BarberiaBooking";
 
 const PricingSection = lazy(() => import("./components/PricingSection"));
 const LogosCarousel = lazy(() => import("./components/LogosCarousel"));
@@ -270,7 +273,7 @@ const CTASection = () => {
   );
 };
 
-const App = () => {
+const LandingPage = () => {
   // Secciones nuevas irán aquí...
 
   const scrollToPrecios = (e) => {
@@ -606,6 +609,18 @@ const App = () => {
         </div>
       </footer>
     </div>
+  );
+};
+
+const App = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/demo-barberia" element={<DemoBarberia />} />
+        <Route path="/demo-barberia/turnos" element={<BarberiaBooking />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
