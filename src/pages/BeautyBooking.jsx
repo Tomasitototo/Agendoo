@@ -87,7 +87,7 @@ const BeautyBooking = () => {
               className="w-full h-full object-contain"
             />
           </div>
-          <span className="text-white font-semibold text-lg font-['Cormorant_Garamond'] tracking-wide">Aster Beauty</span>
+          <span className="text-white font-semibold text-lg font-['Cormorant_Garamond'] tracking-wide">Amara Beauty</span>
         </div>
         <div className="flex gap-3">
           <button className="border border-white/20 text-white/80 rounded-full px-4 py-2 text-sm hover:bg-white/10 transition-colors">Iniciar sesión</button>
@@ -112,7 +112,7 @@ const BeautyBooking = () => {
           </div>
         </div>
         <div className="max-w-3xl mx-auto px-6 pt-16 pb-6 text-left">
-          <h1 className="font-['Cormorant_Garamond'] font-bold text-4xl text-gray-900 italic">Aster Beauty</h1>
+          <h1 className="font-['Cormorant_Garamond'] font-bold text-4xl text-gray-900 italic">Amara Beauty</h1>
           <p className="mt-2 text-[#6B5744] text-xs md:text-sm italic">📍 Palermo, Buenos Aires</p>
         </div>
       </section>
@@ -276,7 +276,7 @@ const BeautyBooking = () => {
                 <img src="/LogoDemoBeauty.webp" alt="Logo" className="w-full h-full object-contain" />
               </div>
               <h2 className="font-['Cormorant_Garamond'] italic font-bold text-3xl text-gray-900 mb-4">¡Turno confirmado!</h2>
-              <p className="text-[#6B5744] text-sm mb-10">Te enviamos la confirmación por email. ¡Nos vemos en <strong>Aster Beauty</strong>!</p>
+              <p className="text-[#6B5744] text-sm mb-10">Te enviamos la confirmación por email. ¡Nos vemos en <strong>Amara Beauty</strong>!</p>
               <button onClick={() => navigate('/demo-beauty')} className="w-full bg-[#C9847A] text-white font-bold py-4 rounded-2xl">Volver al inicio</button>
             </motion.div>
           </motion.div>

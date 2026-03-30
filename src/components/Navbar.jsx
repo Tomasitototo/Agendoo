@@ -57,8 +57,8 @@ export const Navbar = ({ isFloating = false }) => {
                     onClick={() => { navigate("/agente-mateo"); setShowDropdown(false); }}
                     className="flex items-start gap-3 p-3 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors"
                   >
-                    <div className="w-9 h-9 rounded-xl bg-blue-100 flex items-center justify-center text-xl shrink-0">
-                      🤖
+                    <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center shrink-0 overflow-hidden p-1.5">
+                      <img src="/LogoAgentes.webp" alt="Mateo" className="w-full h-full object-contain" />
                     </div>
                     <div>
                       <div className="font-semibold text-gray-900 text-sm">Mateo · Agente de Gestión</div>
@@ -73,8 +73,8 @@ export const Navbar = ({ isFloating = false }) => {
                     onClick={() => { navigate("/agente-sofia"); setShowDropdown(false); }}
                     className="flex items-start gap-3 p-3 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors"
                   >
-                    <div className="w-9 h-9 rounded-xl bg-purple-100 flex items-center justify-center text-xl shrink-0">
-                      ⏰
+                    <div className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center shrink-0 overflow-hidden p-1.5">
+                      <img src="/LogoSofia.webp" alt="Sofía" className="w-full h-full object-contain" />
                     </div>
                     <div>
                       <div className="font-semibold text-gray-900 text-sm">Sofía · Agente de Seguimiento</div>
@@ -154,14 +154,20 @@ export const Navbar = ({ isFloating = false }) => {
                           onClick={() => setOpen(false)}
                           className="flex items-center gap-2 text-gray-600 text-base"
                         >
-                          <span>🤖</span> Mateo · Gestión de turnos
+                          <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center overflow-hidden p-1">
+                            <img src="/LogoAgentes.webp" alt="Mateo" className="w-full h-full object-contain" />
+                          </div>
+                          <span>Mateo · Gestión de turnos</span>
                         </a>
                         <a 
                           href="/agente-sofia" 
                           onClick={() => setOpen(false)}
                           className="flex items-center gap-2 text-gray-600 text-base"
                         >
-                          <span>⏰</span> Sofía · Seguimiento
+                          <div className="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center overflow-hidden p-1">
+                            <img src="/LogoSofia.webp" alt="Sofía" className="w-full h-full object-contain" />
+                          </div>
+                          <span>Sofía · Seguimiento</span>
                         </a>
                       </div>
                     </motion.div>

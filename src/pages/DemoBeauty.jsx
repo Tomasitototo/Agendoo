@@ -32,12 +32,12 @@ const DemoBeauty = () => {
           <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm overflow-hidden p-1.5">
             <img 
               src="/LogoDemoBeauty.webp" 
-              alt="Logo Aster Beauty"
+              alt="Logo Amara Beauty"
               className="w-full h-full object-contain"
             />
           </div>
           <span className="text-white font-semibold text-lg font-['Cormorant_Garamond'] tracking-wide underline decoration-[#C9847A] cursor-pointer" onClick={() => navigate('/')}>
-            Aster Beauty
+            Amara Beauty
           </span>
         </div>
         
@@ -78,7 +78,7 @@ const DemoBeauty = () => {
               >
                 <img 
                   src="/LogoDemoBeauty.webp" 
-                  alt="Logo Aster Beauty"
+                  alt="Logo Amara Beauty"
                   className="w-full h-full object-cover"
                 />
               </motion.div>
@@ -88,7 +88,7 @@ const DemoBeauty = () => {
 
         <div className="max-w-3xl mx-auto px-6 pt-16 pb-10 text-left">
           <h1 className="font-['Cormorant_Garamond'] font-bold text-5xl text-gray-900 italic">
-            Aster Beauty
+            Amara Beauty
           </h1>
           
           <div className="flex items-center gap-2 mt-2">
@@ -190,7 +190,7 @@ const DemoBeauty = () => {
               allowFullScreen="" 
               loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"
-              title="Ubicación Aster Beauty"
+              title="Ubicación Amara Beauty"
             ></iframe>
           </div>
         </div>
