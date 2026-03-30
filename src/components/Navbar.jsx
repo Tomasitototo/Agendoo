@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useHashNavigation } from "../hooks/useHashNavigation";
 
 export const Navbar = ({ isFloating = false }) => {
   const [open, setOpen] = useState(false);
@@ -9,20 +10,10 @@ export const Navbar = ({ isFloating = false }) => {
   const [agentesOpen, setAgentesOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { goToSection } = useHashNavigation();
   
   const toggle = () => setOpen(!open);
   
-  const handleLinkClick = (e, target) => {
-    e.preventDefault();
-    if (location.pathname !== "/") {
-      navigate("/" + target);
-    } else {
-      const el = document.querySelector(target);
-      if (el) el.scrollIntoView({ behavior: "smooth" });
-    }
-    setOpen(false);
-  };
-
   const navClasses = isFloating 
     ? "fixed top-0 left-0 w-full bg-white border-b border-gray-200 z-50 shadow-sm opacity-0 invisible pointer-events-none transition-none"
     : "fixed top-0 left-0 w-full bg-white border-b border-gray-200 z-50 shadow-sm transition-all duration-300";
@@ -30,7 +21,7 @@ export const Navbar = ({ isFloating = false }) => {
   return (
     <nav id="main-navbar" className={navClasses}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-        <a href="/" className="flex items-center space-x-2" onClick={(e) => handleLinkClick(e, "#hero")}>
+        <button onClick={() => goToSection('hero')} className="flex items-center space-x-2 focus:outline-none cursor-pointer">
           {!logoError && (
             <img 
               src="/Logo.webp" 
@@ -40,7 +31,7 @@ export const Navbar = ({ isFloating = false }) => {
             />
           )}
           <span className="font-extrabold text-xl text-gray-900" style={{ fontFamily: "'Sora', sans-serif" }}>Agendoo</span>
-        </a>
+        </button>
         <div className="hidden md:flex space-x-6 items-center text-sm font-medium">
           {/* Dropdown Agentes IA */}
           <div 
@@ -102,11 +93,11 @@ export const Navbar = ({ isFloating = false }) => {
             </AnimatePresence>
           </div>
 
-          <a href="/#ideal-para" onClick={(e) => handleLinkClick(e, "#ideal-para")} className="text-gray-600 hover:text-[#1B72F0] transition-colors">Para quién</a>
-          <a href="/#demos" onClick={(e) => handleLinkClick(e, "#demos")} className="text-gray-600 hover:text-[#1B72F0] transition-colors">Demos</a>
-          <a href="/#precios" onClick={(e) => handleLinkClick(e, "#precios")} className="text-gray-600 hover:text-[#1B72F0] transition-colors">Precios</a>
-          <a href="/#faq" onClick={(e) => handleLinkClick(e, "#faq")} className="text-gray-600 hover:text-[#1B72F0] transition-colors">FAQ</a>
-          <button onClick={(e) => handleLinkClick(e, "#comenzar")} className="ml-4 bg-[#1B72F0] text-white px-5 py-2.5 rounded-xl hover:bg-[#155ec9] transition-all shadow-md hover:shadow-lg active:scale-95">
+          <button onClick={() => goToSection('ideal-para')} className="text-gray-600 hover:text-[#1B72F0] transition-colors cursor-pointer outline-none">Para quién</button>
+          <button onClick={() => goToSection('demos')} className="text-gray-600 hover:text-[#1B72F0] transition-colors cursor-pointer outline-none">Demos</button>
+          <button onClick={() => goToSection('precios')} className="text-gray-600 hover:text-[#1B72F0] transition-colors cursor-pointer outline-none">Precios</button>
+          <button onClick={() => goToSection('faq')} className="text-gray-600 hover:text-[#1B72F0] transition-colors cursor-pointer outline-none">FAQ</button>
+          <button onClick={() => goToSection('comenzar')} className="ml-4 bg-[#1B72F0] text-white px-5 py-2.5 rounded-xl hover:bg-[#155ec9] transition-all shadow-md hover:shadow-lg active:scale-95 cursor-pointer outline-none">
             Comenzar ahora
           </button>
         </div>
@@ -179,14 +170,14 @@ export const Navbar = ({ isFloating = false }) => {
                 <div className="border-t border-gray-100 my-4 w-full" />
               </div>
 
-              <a href="/#ideal-para" onClick={(e) => handleLinkClick(e, "#ideal-para")} className="text-gray-800 text-xl font-medium hover:text-blue-600 transition-colors">Para quién</a>
-              <a href="/#demos" onClick={(e) => handleLinkClick(e, "#demos")} className="text-gray-800 text-xl font-medium hover:text-blue-600 transition-colors">Demos</a>
-              <a href="/#precios" onClick={(e) => handleLinkClick(e, "#precios")} className="text-gray-800 text-xl font-medium hover:text-blue-600 transition-colors">Precios</a>
-              <a href="/#faq" onClick={(e) => handleLinkClick(e, "#faq")} className="text-gray-800 text-xl font-medium hover:text-blue-600 transition-colors">FAQ</a>
+              <button onClick={() => { goToSection('ideal-para'); setOpen(false); }} className="text-gray-800 text-xl font-medium hover:text-blue-600 transition-colors cursor-pointer outline-none">Para quién</button>
+              <button onClick={() => { goToSection('demos'); setOpen(false); }} className="text-gray-800 text-xl font-medium hover:text-blue-600 transition-colors cursor-pointer outline-none">Demos</button>
+              <button onClick={() => { goToSection('precios'); setOpen(false); }} className="text-gray-800 text-xl font-medium hover:text-blue-600 transition-colors cursor-pointer outline-none">Precios</button>
+              <button onClick={() => { goToSection('faq'); setOpen(false); }} className="text-gray-800 text-xl font-medium hover:text-blue-600 transition-colors cursor-pointer outline-none">FAQ</button>
             </div>
             <button 
-              className="mt-4 bg-[#1B72F0] text-white font-bold px-10 py-4 rounded-full text-lg shadow-xl shadow-blue-100 hover:bg-[#155ec9] active:scale-95 transition-all" 
-              onClick={(e) => handleLinkClick(e, "#comenzar")}
+              onClick={() => { goToSection('comenzar'); setOpen(false); }}
+              className="mt-4 bg-[#1B72F0] text-white font-bold px-10 py-4 rounded-full text-lg shadow-xl shadow-blue-100 hover:bg-[#155ec9] active:scale-95 transition-all text-center cursor-pointer outline-none" 
             >
               Comenzar ahora
             </button>

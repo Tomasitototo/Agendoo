@@ -1,6 +1,9 @@
 import React from "react";
+import { useHashNavigation } from "../hooks/useHashNavigation";
 
 export const Footer = () => {
+  const { goToSection } = useHashNavigation();
+
   return (
     <footer id="footer" className="bg-[#0A0A0A] pt-16 relative flex flex-col justify-between">
       {/* CONTENIDO SUPERIOR */}
@@ -28,12 +31,12 @@ export const Footer = () => {
 
         {/* LADO DERECHO */}
         <div className="flex flex-col text-left md:text-right space-y-3 mt-8 md:mt-0">
-          <a href="/#ideal-para" className="text-white/50 text-sm hover:text-white transition-colors">Ideal para</a>
-          <a href="/#sin-vs-con" className="text-white/50 text-sm hover:text-white transition-colors">Sin vs Con</a>
-          <a href="/#demos" className="text-white/50 text-sm hover:text-white transition-colors">Demos</a>
-          <a href="/#precios" className="text-white/50 text-sm hover:text-white transition-colors">Precios</a>
-          <a href="/#faq" className="text-white/50 text-sm hover:text-white transition-colors">FAQ</a>
-          <a href="/#comenzar" className="text-white/50 text-sm hover:text-white transition-colors">Comenzar ahora</a>
+          <button onClick={() => goToSection('ideal-para')} className="text-white/50 text-sm hover:text-white transition-colors cursor-pointer text-left md:text-right outline-none">Ideal para</button>
+          <button onClick={() => goToSection('sin-vs-con')} className="text-white/50 text-sm hover:text-white transition-colors cursor-pointer text-left md:text-right outline-none">Sin vs Con</button>
+          <button onClick={() => goToSection('demos')} className="text-white/50 text-sm hover:text-white transition-colors cursor-pointer text-left md:text-right outline-none">Demos</button>
+          <button onClick={() => goToSection('precios')} className="text-white/50 text-sm hover:text-white transition-colors cursor-pointer text-left md:text-right outline-none">Precios</button>
+          <button onClick={() => goToSection('faq')} className="text-white/50 text-sm hover:text-white transition-colors cursor-pointer text-left md:text-right outline-none">FAQ</button>
+          <button onClick={() => goToSection('comenzar')} className="text-white/50 text-sm hover:text-white transition-colors cursor-pointer text-left md:text-right outline-none">Comenzar ahora</button>
           <a href="https://itssynapse.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 text-sm transition-colors mt-2">
             Desarrollado por Synapse &rarr;
           </a>

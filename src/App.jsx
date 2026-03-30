@@ -237,7 +237,16 @@ const CTASection = () => {
 };
 
 const LandingPage = () => {
-  // Secciones nuevas irán aquí...
+  useEffect(() => {
+    const sectionId = sessionStorage.getItem('scrollTo')
+    if (sectionId) {
+      sessionStorage.removeItem('scrollTo')
+      setTimeout(() => {
+        const el = document.getElementById(sectionId)
+        if (el) el.scrollIntoView({ behavior: 'smooth' })
+      }, 300)
+    }
+  }, [])
 
   const scrollToPrecios = (e) => {
     e.preventDefault();
