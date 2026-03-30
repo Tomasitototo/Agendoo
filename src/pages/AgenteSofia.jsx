@@ -178,22 +178,22 @@ const AgenteSofia = () => {
       {/* FEATURES GRID */}
       <section className="py-20 px-6">
         <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-white mb-12" style={{ fontFamily: "'Sora', sans-serif" }}>
+          <h2 className="text-3xl font-bold text-gray-900 mb-12" style={{ fontFamily: "'Sora', sans-serif" }}>
             Todo lo que hace Sofía
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { icon: "🔔", title: "Recordatorio 24hs", desc: "Avisa automáticamente antes de cada turno." },
               { icon: "📉", title: "Reduce ausencias", desc: "Menos olvidos = menos turnos perdidos." },
-              { icon: "⭐", title: "Feedback post-turno", desc: "Sabe cómo estuvo cada servicio." },
-              { icon: "🧹", title: "Memoria limpia", desc: "Borra conversaciones viejas automáticamente." },
+              { icon: "🗺️", title: "Reseña en Google Maps", desc: "Sofía invita al cliente a reseñar el negocio en Google Maps con el link directo del local." },
+              { icon: "📋", title: "Historial completo", desc: "Todas las conversaciones quedan guardadas para que puedas revisarlas cuando quieras." },
               { icon: "📊", title: "Resultados en tu panel", desc: "Ves el feedback de cada cliente." },
               { icon: "⚡", title: "100% automático", desc: "No necesita configuración diaria." }
             ].map((feature, i) => (
-              <div key={i} className="bg-white border border-gray-200 rounded-2xl p-6 text-left hover:shadow-md transition-all cursor-default">
+              <div key={i} className="bg-white border border-gray-200 rounded-2xl p-6 text-left shadow-sm hover:shadow-md transition-all cursor-default">
                 <div className="text-2xl mb-3">{feature.icon}</div>
                 <h3 className="font-bold text-gray-900 text-base mb-1">{feature.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{feature.desc}</p>
+                <p className="text-gray-600 text-sm leading-relaxed">{feature.desc}</p>
               </div>
             ))}
           </div>

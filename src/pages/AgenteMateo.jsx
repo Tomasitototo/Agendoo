@@ -387,10 +387,10 @@ const AgenteMateo = () => {
               { icon: "💬", title: "Panel de chats", desc: "Ves todas las conversaciones en tiempo real." },
               { icon: "🖐️", title: "Modo manual", desc: "Tomás el control cuando querés vos." }
             ].map((feature, i) => (
-              <div key={i} className="bg-white border border-gray-200 rounded-2xl p-6 text-left transition-all cursor-default shadow-sm group">
+              <div key={i} className="bg-white border border-gray-200 rounded-2xl p-6 text-left shadow-sm hover:shadow-md transition-all cursor-default group">
                 <div className="text-3xl mb-3 group-hover:scale-110 transition-transform inline-block">{feature.icon}</div>
                 <h3 className="font-bold text-gray-900 text-base mb-1">{feature.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{feature.desc}</p>
+                <p className="text-gray-600 text-sm leading-relaxed">{feature.desc}</p>
               </div>
             ))}
           </div>
@@ -408,27 +408,6 @@ const AgenteMateo = () => {
             className="inline-block bg-blue-600 hover:bg-blue-500 text-white font-bold px-10 py-5 rounded-2xl text-lg transition-all active:scale-95 shadow-xl shadow-blue-900/10"
           >
             Quiero a Mateo en mi negocio →
-          </a>
-        </div>
-      </section>
-
-      {/* SYNAPSE ATTRIBUTION */}
-      <section className="py-16 bg-white text-center">
-        <div className="max-w-4xl mx-auto">
-          <h3 className="text-2xl lg:text-3xl font-extrabold text-gray-900 mb-[-25px] tracking-tight" style={{ fontFamily: "'Sora', sans-serif" }}>
-            Impulsado por
-          </h3>
-          <a 
-            href="https://itssynapse.com" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="group block transition-all duration-300 transform hover:scale-105"
-          >
-            <img 
-              src="/logo-synapse.webp" 
-              alt="Synapse"
-              className="h-40 lg:h-56 w-auto object-contain mx-auto grayscale group-hover:grayscale-0 transition-all duration-500" 
-            />
           </a>
         </div>
       </section>
