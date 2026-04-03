@@ -6,7 +6,7 @@ import { UserCircle } from 'lucide-react';
 const BarberiaBooking = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
-  
+
   // -- ESTADO DEL FLUJO --
   const [selectedDate, setSelectedDate] = useState(null); // { day: number, month: string, year: number }
   const [selectedTimes, setSelectedTimes] = useState([]); // Array de strings ["10:00", "11:30"]
@@ -104,15 +104,15 @@ const BarberiaBooking = () => {
 
   return (
     <div className="min-h-screen font-['DM_Sans'] bg-[#FAF7F2] text-[#1A1A1A]">
-      {/* SECCIÓN 1 — NAVBAR */}
-      <nav className="bg-transparent md:bg-[#2C1810] px-6 py-4 flex justify-between items-center sticky top-0 z-50 shadow-none md:shadow-lg">
+      {/* SECCIÓN 1 — NAVBAR (Desktop Only) */}
+      <nav className="hidden md:flex bg-[#2C1810] px-6 py-4 justify-between items-center sticky top-0 z-50 shadow-lg">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate('/demo-barberia')}>
           <img src="/logo-barberia.webp" alt="Logo" className="hidden md:block w-10 h-10 object-contain" />
           <span className="hidden md:block text-white font-semibold text-lg font-['Playfair_Display'] tracking-wide">Barbería Monarca</span>
         </div>
-        
+
         <div className="hidden md:flex gap-3">
-          <button 
+          <button
             onClick={() => {
               setAuthTab('login');
               setAuthModalOpen(true);
@@ -121,55 +121,12 @@ const BarberiaBooking = () => {
           >
             Iniciar sesión
           </button>
-          <button 
+          <button
             onClick={() => setStep(1)}
             className="bg-[#8B6914] text-white rounded-full px-4 py-2 text-sm font-semibold hover:bg-yellow-700 transition-colors shadow-lg shadow-yellow-900/20"
           >
             Reservar turno
           </button>
-        </div>
-
-        {/* Mobile Navbar Icons */}
-        <div className="md:hidden relative" ref={dropdownRef}>
-          <button 
-            onClick={() => setDropdownOpen(!dropdownOpen)}
-            className="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-sm"
-          >
-            <UserCircle size={24} color="#2C1810" />
-          </button>
-
-          <AnimatePresence>
-            {dropdownOpen && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                className="absolute right-0 mt-2 w-48 bg-[#FAF7F2] rounded-xl shadow-md overflow-hidden z-50 transition-all"
-                style={{ border: '1px solid rgba(44, 24, 16, 0.2)' }}
-              >
-                <button 
-                  onClick={() => {
-                    setAuthTab('login');
-                    setAuthModalOpen(true);
-                    setDropdownOpen(false);
-                  }}
-                  className="w-full text-left py-3 px-4 text-sm font-medium text-[#2C1810] hover:bg-[#2C1810]/5 transition-colors font-['DM_Sans']"
-                >
-                  Iniciar sesión
-                </button>
-                <button 
-                  onClick={() => {
-                    setAuthTab('signup');
-                    setAuthModalOpen(true);
-                    setDropdownOpen(false);
-                  }}
-                  className="w-full text-left py-3 px-4 text-sm font-medium text-[#2C1810] hover:bg-[#2C1810]/5 border-t border-[#2C1810]/10 transition-colors font-['DM_Sans']"
-                >
-                  Registrarse
-                </button>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </div>
       </nav>
 
@@ -177,22 +134,64 @@ const BarberiaBooking = () => {
       <section className="w-full max-w-none px-0">
         {/* Banner con Logo Superpuesto */}
         <div className="relative">
-          <img 
-            src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1200" 
+          {/* Mobile Profile Icon - Fixed on Scroll */}
+          <div className="md:hidden fixed top-6 right-6 z-[60]" ref={dropdownRef}>
+            <button
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              className="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-lg border border-black/5 active:scale-95 transition-transform"
+            >
+              <UserCircle size={24} color="#2C1810" />
+            </button>
+
+            <AnimatePresence>
+              {dropdownOpen && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                  className="absolute right-0 mt-2 w-48 bg-[#FAF7F2] rounded-2xl shadow-2xl border border-black/10 overflow-hidden z-[60]"
+                >
+                  <button
+                    onClick={() => {
+                      setAuthTab('login');
+                      setAuthModalOpen(true);
+                      setDropdownOpen(false);
+                    }}
+                    className="w-full text-left py-4 px-5 text-sm font-bold text-[#2C1810] hover:bg-black/5 transition-colors"
+                  >
+                    Iniciar sesión
+                  </button>
+                  <button
+                    onClick={() => {
+                      setAuthTab('signup');
+                      setAuthModalOpen(true);
+                      setDropdownOpen(false);
+                    }}
+                    className="w-full text-left py-4 px-5 text-sm font-bold text-[#2C1810] hover:bg-black/5 border-t border-black/5 transition-colors"
+                  >
+                    Registrarse
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          <img
+            src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1200"
             alt="Barbería Banner"
-            className="w-full h-48 md:h-64 object-cover shadow-lg"
+            className="w-full h-40 md:h-64 object-cover shadow-lg"
           />
-          
+
           {/* Logo Superpuesto */}
           <div className="max-w-3xl mx-auto px-6 relative">
             <div className="absolute -bottom-10 left-6 z-10">
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-[#2C1810] border-4 border-white shadow-2xl overflow-hidden flex items-center justify-center font-bold text-white text-3xl"
               >
-                <img 
-                  src="/logo-barberia.webp" 
+                <img
+                  src="/logo-barberia.webp"
                   alt="Logo"
                   className="w-full h-full object-cover scale-110"
                 />
@@ -206,7 +205,7 @@ const BarberiaBooking = () => {
           <h1 className="font-['Playfair_Display'] font-bold text-3xl md:text-4xl text-gray-900">
             Barbería Monarca
           </h1>
-          
+
           <div className="flex items-center gap-2 mt-2">
             <div className="flex text-yellow-500 text-sm">
               {"⭐".repeat(5)}
@@ -221,15 +220,15 @@ const BarberiaBooking = () => {
       </section>
 
       <main className="max-w-4xl mx-auto px-4 py-8">
-        
+
         <div className={`grid ${step === 1 ? 'grid-cols-1' : 'md:grid-cols-[240px_1fr]'} gap-8`}>
-          
+
           {/* COLUMNA IZQUIERDA: RESUMEN (Sticky) */}
           {step > 1 && (
             <aside className="hidden md:block">
               <div className="sticky top-24 bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
                 <h3 className="text-[10px] font-bold text-gray-400 tracking-[0.2em] mb-4">TU RESERVA</h3>
-                
+
                 <div className="space-y-5">
                   {selectedDate && (
                     <div className="flex flex-col gap-1">
@@ -284,10 +283,10 @@ const BarberiaBooking = () => {
           {/* COLUMNA DERECHA: PASOS */}
           <section>
             <AnimatePresence mode="wait">
-              
+
               {/* PASO 1 — CALENDARIO */}
               {step === 1 && (
-                <motion.div 
+                <motion.div
                   key="step1" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
                   className="bg-white rounded-3xl border border-gray-200 p-8 shadow-sm max-w-2xl mx-auto"
                 >
@@ -306,10 +305,10 @@ const BarberiaBooking = () => {
                   <div className="grid grid-cols-7 gap-2">
                     {/* Padding for March 1st (starts on Sunday = 6 empty slots) */}
                     {Array.from({ length: 6 }).map((_, i) => <div key={`empty-${i}`} />)}
-                    
+
                     {diasMarzo.map(day => {
                       const todayObj = new Date();
-                      const isPast = day < todayObj.getDate(); 
+                      const isPast = day < todayObj.getDate();
                       const isDisabled = disabledDays.includes(day) || isPast;
                       const isToday = day === todayObj.getDate();
                       const isSelected = selectedDate?.day === day;
@@ -340,14 +339,14 @@ const BarberiaBooking = () => {
 
               {/* PASO 2 — HORARIOS */}
               {step === 2 && (
-                <motion.div 
+                <motion.div
                   key="step2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
                   className="bg-white rounded-3xl border border-gray-200 p-8 shadow-sm max-w-2xl mx-auto"
                 >
                   <button onClick={() => setStep(1)} className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 mb-6 group transition-colors">
                     <span className="text-gray-400 group-hover:text-gray-600">←</span>
                   </button>
-                  
+
                   <h2 className="text-2xl font-bold text-gray-900 font-['Playfair_Display'] mb-2">Elegí tu horario</h2>
                   <p className="text-gray-400 text-sm mb-8">Podés seleccionar más de un turno si buscás servicios largos.</p>
 
@@ -409,7 +408,7 @@ const BarberiaBooking = () => {
 
               {/* PASO 3 — SELECCIÓN DE PROFESIONAL */}
               {step === 3 && (
-                <motion.div 
+                <motion.div
                   key="step3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
                   className="bg-white rounded-3xl border border-gray-200 p-8 shadow-sm max-w-2xl mx-auto"
                 >
@@ -453,7 +452,7 @@ const BarberiaBooking = () => {
 
               {/* PASO 4 — SERVICIOS Y DATOS */}
               {step === 4 && (
-                <motion.div 
+                <motion.div
                   key="step4" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
                   className="bg-white rounded-3xl border border-gray-200 p-8 shadow-sm max-w-2xl mx-auto"
                 >
@@ -473,7 +472,7 @@ const BarberiaBooking = () => {
                             <span className="text-yellow-700 font-black text-xl font-['Playfair_Display']">${servicesPerTime[time].precio}</span>
                           )}
                         </div>
-                        
+
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                           {servicios.map(s => {
                             const isSel = servicesPerTime[time]?.nombre === s.nombre;
@@ -501,35 +500,35 @@ const BarberiaBooking = () => {
                     <div className="grid grid-cols-1 gap-6">
                       <div className="space-y-1.5">
                         <label className="text-[11px] font-bold text-gray-400 uppercase ml-1">Nombre completo *</label>
-                        <input 
+                        <input
                           type="text" placeholder="Tu nombre"
-                          value={userData.nombre} onChange={e => setUserData({...userData, nombre: e.target.value})}
+                          value={userData.nombre} onChange={e => setUserData({ ...userData, nombre: e.target.value })}
                           className="w-full bg-white border border-gray-100 rounded-2xl px-5 py-4 text-sm focus:border-yellow-700 focus:outline-none transition-all shadow-sm"
                         />
                       </div>
                       <div className="grid sm:grid-cols-2 gap-4">
                         <div className="space-y-1.5">
                           <label className="text-[11px] font-bold text-gray-400 uppercase ml-1">Teléfono *</label>
-                          <input 
+                          <input
                             type="tel" placeholder="2910123456"
-                            value={userData.telefono} onChange={e => setUserData({...userData, telefono: e.target.value})}
+                            value={userData.telefono} onChange={e => setUserData({ ...userData, telefono: e.target.value })}
                             className="w-full bg-white border border-gray-100 rounded-2xl px-5 py-4 text-sm focus:border-yellow-700 focus:outline-none transition-all shadow-sm"
                           />
                         </div>
                         <div className="space-y-1.5">
                           <label className="text-[11px] font-bold text-gray-400 uppercase ml-1">Email *</label>
-                          <input 
+                          <input
                             type="email" placeholder="hola@ejemplo.com"
-                            value={userData.email} onChange={e => setUserData({...userData, email: e.target.value})}
+                            value={userData.email} onChange={e => setUserData({ ...userData, email: e.target.value })}
                             className="w-full bg-white border border-gray-100 rounded-2xl px-5 py-4 text-sm focus:border-yellow-700 focus:outline-none transition-all shadow-sm"
                           />
                         </div>
                       </div>
                       <div className="space-y-1.5">
                         <label className="text-[11px] font-bold text-gray-400 uppercase ml-1">Notas (opcional)</label>
-                        <textarea 
+                        <textarea
                           rows="3" placeholder="Alguna indicación especial..."
-                          value={userData.notas} onChange={e => setUserData({...userData, notas: e.target.value})}
+                          value={userData.notas} onChange={e => setUserData({ ...userData, notas: e.target.value })}
                           className="w-full bg-white border border-gray-100 rounded-2xl px-5 py-4 text-sm focus:border-yellow-700 focus:outline-none transition-all resize-none shadow-sm"
                         ></textarea>
                       </div>
@@ -551,7 +550,7 @@ const BarberiaBooking = () => {
 
               {/* PASO 5 — CONFIRMAR PAGO */}
               {step === 5 && (
-                <motion.div 
+                <motion.div
                   key="step5" initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}
                   className="bg-white rounded-3xl border border-gray-200 p-8 shadow-sm max-w-2xl mx-auto"
                 >
@@ -630,11 +629,11 @@ const BarberiaBooking = () => {
       {/* MODAL DE ÉXITO */}
       <AnimatePresence>
         {showSuccessModal && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }}
             className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-md flex items-center justify-center p-4"
           >
-            <motion.div 
+            <motion.div
               initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }}
               className="bg-white rounded-[2.5rem] p-12 text-center max-w-sm w-full shadow-2xl border border-gray-100"
             >
@@ -660,21 +659,21 @@ const BarberiaBooking = () => {
       {/* MODAL DE AUTENTICACIÓN */}
       <AnimatePresence>
         {authModalOpen && (
-          <motion.div 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setAuthModalOpen(false)}
             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4 transition-all"
           >
-            <motion.div 
-              initial={{ scale: 0.9, y: 20 }} 
-              animate={{ scale: 1, y: 0 }} 
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
               onClick={(e) => e.stopPropagation()}
               className="bg-white rounded-[2.5rem] w-full max-w-sm p-8 relative shadow-2xl overflow-hidden"
             >
-              <button 
+              <button
                 onClick={() => setAuthModalOpen(false)}
                 className="absolute top-6 right-6 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 hover:bg-gray-200 transition-colors z-10"
               >
@@ -682,13 +681,13 @@ const BarberiaBooking = () => {
               </button>
 
               <div className="flex gap-6 mb-8 border-b border-gray-100">
-                <button 
+                <button
                   onClick={() => { setAuthTab('login'); setPasswordValue(''); }}
                   className={`pb-3 text-sm font-bold transition-all border-b-2 ${authTab === 'login' ? 'text-yellow-700 border-yellow-700' : 'text-gray-400 border-transparent hover:text-gray-600'}`}
                 >
                   Iniciar sesión
                 </button>
-                <button 
+                <button
                   onClick={() => { setAuthTab('signup'); setPasswordValue(''); }}
                   className={`pb-3 text-sm font-bold transition-all border-b-2 ${authTab === 'signup' ? 'text-yellow-700 border-yellow-700' : 'text-gray-400 border-transparent hover:text-gray-600'}`}
                 >
@@ -704,14 +703,14 @@ const BarberiaBooking = () => {
                   <div className="space-y-4">
                     <div className="space-y-1.5">
                       <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Email</label>
-                      <input 
+                      <input
                         type="email" placeholder="tu@email.com"
                         className="w-full px-4 py-3.5 bg-gray-50 border border-gray-100 rounded-2xl text-sm focus:border-yellow-700 focus:bg-white focus:outline-none transition-all"
                       />
                     </div>
                     <div className="space-y-1.5">
                       <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Contraseña</label>
-                      <input 
+                      <input
                         type="password" placeholder="••••••••"
                         className="w-full px-4 py-3.5 bg-gray-50 border border-gray-100 rounded-2xl text-sm focus:border-yellow-700 focus:bg-white focus:outline-none transition-all"
                       />
@@ -730,10 +729,10 @@ const BarberiaBooking = () => {
                   <div className="space-y-4">
                     <input type="text" placeholder="Nombre completo" className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm focus:border-yellow-700 focus:outline-none transition-all" />
                     <input type="email" placeholder="Email" className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm focus:border-yellow-700 focus:outline-none transition-all" />
-                    <input 
+                    <input
                       type="password" placeholder="Contraseña"
                       value={passwordValue} onChange={(e) => setPasswordValue(e.target.value)}
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm focus:border-yellow-700 focus:outline-none transition-all" 
+                      className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm focus:border-yellow-700 focus:outline-none transition-all"
                     />
                   </div>
 
@@ -750,7 +749,7 @@ const BarberiaBooking = () => {
       {/* BOTONES FLOTANTES CÍRCULOS (Igual a DemoBarberia) */}
       <div className="hidden md:flex fixed right-6 bottom-8 flex-col gap-4 z-50">
         {/* Instagram */}
-        <motion.a 
+        <motion.a
           whileHover={{ scale: 1.08 }}
           href="https://www.instagram.com/synapse.ok/" target="_blank" rel="noopener noreferrer"
           className="w-12 h-12 rounded-full flex items-center justify-center shadow-[0_4px_16px_rgba(0,0,0,0.2)] transition-all duration-200 bg-[#2C1810]"
@@ -758,7 +757,7 @@ const BarberiaBooking = () => {
           <svg className="w-5 h-5 text-[#8B6914]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771-4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" /></svg>
         </motion.a>
         {/* WhatsApp */}
-        <motion.a 
+        <motion.a
           whileHover={{ scale: 1.08 }}
           href="https://wa.me/5492920543376?text=Quiero%20mi%20sistema%20de%20turnos!%20Me%20gusto%20la%20demo%20de%20barberia!" target="_blank" rel="noopener noreferrer"
           className="w-12 h-12 rounded-full flex items-center justify-center text-white bg-[#8B6914] shadow-[0_4px_16px_rgba(0,0,0,0.2)] transition-all duration-200"

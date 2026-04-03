@@ -41,11 +41,11 @@ const DemoBarberia = () => {
 
   return (
     <div className="min-h-screen font-['DM_Sans'] bg-[#FAF7F2] text-[#1A1A1A]">
-      {/* SECCIÓN 1 — NAVBAR */}
-      <nav className="bg-transparent md:bg-[#2C1810] px-6 py-4 flex justify-between items-center sticky top-0 z-50 shadow-none md:shadow-lg">
+      {/* SECCIÓN 1 — NAVBAR (Desktop Only) */}
+      <nav className="hidden md:flex bg-[#2C1810] px-6 py-4 justify-between items-center sticky top-0 z-50 shadow-lg">
         <div className="flex items-center gap-3">
-          <img 
-            src="/logo-barberia.webp" 
+          <img
+            src="/logo-barberia.webp"
             alt="Logo Barbería Monarca"
             className="hidden md:block w-10 h-10 object-contain"
           />
@@ -53,9 +53,9 @@ const DemoBarberia = () => {
             Barbería Monarca
           </span>
         </div>
-        
+
         <div className="hidden md:flex gap-3">
-          <button 
+          <button
             onClick={() => {
               setAuthTab('login');
               setAuthModalOpen(true);
@@ -64,55 +64,12 @@ const DemoBarberia = () => {
           >
             Iniciar sesión
           </button>
-          <button 
+          <button
             onClick={() => navigate('/demo-barberia/turnos')}
             className="bg-[#8B6914] text-white rounded-full px-4 py-2 text-sm font-semibold hover:bg-yellow-700 transition-colors shadow-lg shadow-yellow-900/20"
           >
             Reservar turno
           </button>
-        </div>
-
-        {/* Mobile Navbar Icons */}
-        <div className="md:hidden relative" ref={dropdownRef}>
-          <button 
-            onClick={() => setDropdownOpen(!dropdownOpen)}
-            className="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-sm"
-          >
-            <UserCircle size={24} color="#2C1810" />
-          </button>
-
-          <AnimatePresence>
-            {dropdownOpen && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                className="absolute right-0 mt-2 w-48 bg-[#FAF7F2] rounded-xl shadow-md overflow-hidden z-50 overflow-hidden"
-                style={{ border: '1px solid rgba(44, 24, 16, 0.2)' }}
-              >
-                <button 
-                  onClick={() => {
-                    setAuthTab('login');
-                    setAuthModalOpen(true);
-                    setDropdownOpen(false);
-                  }}
-                  className="w-full text-left py-3 px-4 text-sm font-medium text-[#2C1810] hover:bg-[#2C1810]/5 transition-colors font-['DM_Sans']"
-                >
-                  Iniciar sesión
-                </button>
-                <button 
-                  onClick={() => {
-                    setAuthTab('signup');
-                    setAuthModalOpen(true);
-                    setDropdownOpen(false);
-                  }}
-                  className="w-full text-left py-3 px-4 text-sm font-medium text-[#2C1810] hover:bg-[#2C1810]/5 border-t border-[#2C1810]/10 transition-colors font-['DM_Sans']"
-                >
-                  Registrarse
-                </button>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </div>
       </nav>
 
@@ -120,22 +77,64 @@ const DemoBarberia = () => {
       <section className="w-full max-w-none px-0">
         {/* Banner con Logo Superpuesto */}
         <div className="relative">
-          <img 
-            src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1200" 
+          {/* Mobile Profile Icon - Fixed on Scroll */}
+          <div className="md:hidden fixed top-6 right-6 z-[60]" ref={dropdownRef}>
+            <button
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              className="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-lg border border-black/5 active:scale-95 transition-transform"
+            >
+              <UserCircle size={24} color="#2C1810" />
+            </button>
+
+            <AnimatePresence>
+              {dropdownOpen && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                  className="absolute right-0 mt-2 w-48 bg-[#FAF7F2] rounded-2xl shadow-2xl border border-black/10 overflow-hidden z-[60]"
+                >
+                  <button
+                    onClick={() => {
+                      setAuthTab('login');
+                      setAuthModalOpen(true);
+                      setDropdownOpen(false);
+                    }}
+                    className="w-full text-left py-4 px-5 text-sm font-bold text-[#2C1810] hover:bg-black/5 transition-colors"
+                  >
+                    Iniciar sesión
+                  </button>
+                  <button
+                    onClick={() => {
+                      setAuthTab('signup');
+                      setAuthModalOpen(true);
+                      setDropdownOpen(false);
+                    }}
+                    className="w-full text-left py-4 px-5 text-sm font-bold text-[#2C1810] hover:bg-black/5 border-t border-black/5 transition-colors"
+                  >
+                    Registrarse
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          <img
+            src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1200"
             alt="Barbería Banner"
-            className="w-full h-64 object-cover shadow-lg"
+            className="w-full h-40 md:h-64 object-cover shadow-lg"
           />
-          
+
           {/* Logo Superpuesto */}
           <div className="max-w-3xl mx-auto px-6 relative">
             <div className="absolute -bottom-10 left-6 z-10">
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="w-24 h-24 rounded-2xl bg-[#2C1810] border-4 border-white shadow-2xl overflow-hidden flex items-center justify-center font-bold text-white text-3xl"
               >
-                <img 
-                  src="/logo-barberia.webp" 
+                <img
+                  src="/logo-barberia.webp"
                   alt="Logo"
                   className="w-full h-full object-cover scale-110"
                 />
@@ -149,7 +148,7 @@ const DemoBarberia = () => {
           <h1 className="font-['Playfair_Display'] font-bold text-4xl text-gray-900">
             Barbería Monarca
           </h1>
-          
+
           <div className="flex items-center gap-2 mt-2">
             <div className="flex text-yellow-500 text-sm">
               {"⭐".repeat(5)}
@@ -162,18 +161,18 @@ const DemoBarberia = () => {
           </p>
 
           <div className="md:hidden mt-6 flex justify-center gap-4 px-2">
-            <a 
-              href="https://instagram.com" 
-              target="_blank" 
+            <a
+              href="https://instagram.com"
+              target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center w-12 h-12 rounded-full bg-[#2C1810] text-white shadow-md transition-all hover:opacity-90 active:scale-95"
               aria-label="Instagram"
             >
               <FaInstagram size={20} />
             </a>
-            <a 
-              href="https://wa.me/5492914000000" 
-              target="_blank" 
+            <a
+              href="https://wa.me/5492914000000"
+              target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center w-12 h-12 rounded-full bg-[#2C1810] text-white shadow-md transition-all hover:opacity-90 active:scale-95"
               aria-label="WhatsApp"
@@ -183,7 +182,7 @@ const DemoBarberia = () => {
           </div>
 
           <div className="md:hidden mt-4 px-2">
-            <button 
+            <button
               onClick={() => navigate('/demo-barberia/turnos')}
               className="flex items-center justify-center gap-2 w-full rounded-xl bg-[#2C1810] text-white py-4 font-['DM_Sans'] shadow-lg transition-transform active:scale-[0.98]"
             >
@@ -194,7 +193,7 @@ const DemoBarberia = () => {
 
           {/* Botón Galería Colapsable - Mobile */}
           <div className="md:hidden mt-4 px-2">
-            <button 
+            <button
               onClick={() => setOpenSection(openSection === 'galeria' ? null : 'galeria')}
               className="flex items-center justify-between w-full rounded-xl border border-[#8B6914] bg-transparent text-[#2C1810] py-4 px-4 font-['DM_Sans'] transition-all active:scale-[0.98]"
             >
@@ -202,9 +201,9 @@ const DemoBarberia = () => {
                 <Images size={20} />
                 <span className="font-bold">Galería</span>
               </div>
-              <ChevronDown 
-                size={20} 
-                className={`transition-transform duration-300 ${openSection === 'galeria' ? 'rotate-180' : ''}`} 
+              <ChevronDown
+                size={20}
+                className={`transition-transform duration-300 ${openSection === 'galeria' ? 'rotate-180' : ''}`}
               />
             </button>
 
@@ -218,12 +217,12 @@ const DemoBarberia = () => {
                 >
                   <div className="pt-4 space-y-3">
                     {/* Imagen Grande */}
-                    <div 
+                    <div
                       onClick={() => setLightbox(images[0])}
                       className="rounded-2xl overflow-hidden shadow-lg border border-gray-100 cursor-pointer"
                     >
-                      <img 
-                        src={images[0]} 
+                      <img
+                        src={images[0]}
                         alt="Barber Shop Style"
                         className="h-48 object-cover w-full"
                       />
@@ -231,13 +230,13 @@ const DemoBarberia = () => {
                     {/* Grid 2x2 */}
                     <div className="grid grid-cols-2 gap-3">
                       {images.slice(1).map((src, i) => (
-                        <div 
-                          key={i} 
+                        <div
+                          key={i}
                           onClick={() => setLightbox(src)}
                           className="rounded-2xl overflow-hidden shadow-md border border-gray-100 cursor-pointer"
                         >
-                          <img 
-                            src={src} 
+                          <img
+                            src={src}
                             alt={`Barber detail ${i}`}
                             className="h-32 object-cover w-full"
                           />
@@ -252,7 +251,7 @@ const DemoBarberia = () => {
 
           {/* Botón Mapa Colapsable - Mobile */}
           <div className="md:hidden mt-4 px-2">
-            <button 
+            <button
               onClick={() => setOpenSection(openSection === 'mapa' ? null : 'mapa')}
               className="flex items-center justify-between w-full rounded-xl border border-[#8B6914] bg-transparent text-[#2C1810] py-4 px-4 font-['DM_Sans'] transition-all active:scale-[0.98]"
             >
@@ -260,9 +259,9 @@ const DemoBarberia = () => {
                 <MapPin size={20} />
                 <span className="font-bold">¿Cómo llegar?</span>
               </div>
-              <ChevronDown 
-                size={20} 
-                className={`transition-transform duration-300 ${openSection === 'mapa' ? 'rotate-180' : ''}`} 
+              <ChevronDown
+                size={20}
+                className={`transition-transform duration-300 ${openSection === 'mapa' ? 'rotate-180' : ''}`}
               />
             </button>
 
@@ -276,13 +275,13 @@ const DemoBarberia = () => {
                 >
                   <div className="pt-4">
                     <div className="w-full h-[400px] rounded-2xl overflow-hidden border border-gray-200 shadow-md bg-white">
-                      <iframe 
+                      <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3144!2d-62.2689!3d-38.7183!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0!2zMzjCsDQzJzA2LjAiUyA2MsKwMTYnMDguMCJX!5e0!3m2!1ses!2sar!4v1234567890"
-                        width="100%" 
-                        height="100%" 
-                        style={{ border: 0 }} 
-                        allowFullScreen="" 
-                        loading="lazy" 
+                        width="100%"
+                        height="100%"
+                        style={{ border: 0 }}
+                        allowFullScreen=""
+                        loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
                         title="Ubicación Barbería Monarca Mobile"
                       ></iframe>
@@ -294,8 +293,8 @@ const DemoBarberia = () => {
           </div>
 
           <p className="hidden md:block mt-6 text-[#6B5744] text-lg leading-relaxed font-medium">
-            Barbería tradicional con estilo. 
-            Cortes clásicos y modernos, atención personalizada 
+            Barbería tradicional con estilo.
+            Cortes clásicos y modernos, atención personalizada
             y ambiente único en el corazón de Bahía Blanca.
           </p>
         </div>
@@ -306,12 +305,12 @@ const DemoBarberia = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 w-full">
           {/* Columna Izquierda — Imagen Alta */}
           <div className="col-span-1 md:row-span-2 h-full">
-            <div 
+            <div
               onClick={() => setLightbox(images[0])}
               className="rounded-2xl overflow-hidden h-full shadow-lg border border-gray-100 cursor-pointer group"
             >
-              <img 
-                src={images[0]} 
+              <img
+                src={images[0]}
                 alt="Barber Shop Style"
                 className="h-full min-h-[420px] object-cover w-full group-hover:scale-[1.08] transition-transform duration-500 ease-in-out"
               />
@@ -321,13 +320,13 @@ const DemoBarberia = () => {
           {/* Columna Derecha — Grid 2x2 */}
           <div className="col-span-1 md:col-span-2 grid grid-cols-2 gap-3">
             {images.slice(1).map((src, i) => (
-              <div 
-                key={i} 
+              <div
+                key={i}
                 onClick={() => setLightbox(src)}
                 className="rounded-2xl overflow-hidden shadow-md border border-gray-100 cursor-pointer group"
               >
-                <img 
-                  src={src} 
+                <img
+                  src={src}
                   alt={`Barber detail ${i}`}
                   className="h-48 md:h-64 object-cover w-full group-hover:scale-[1.08] transition-transform duration-500 ease-in-out"
                 />
@@ -344,13 +343,13 @@ const DemoBarberia = () => {
             <h2 className="font-['Playfair_Display'] text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
               Reservá tu turno online
             </h2>
-            
+
             <p className="text-white/60 text-base lg:text-xl mb-10 max-w-lg mx-auto font-medium leading-relaxed">
               Sin llamadas. Sin esperas. <br className="hidden sm:block" />
               Elegí el día y horario que más te convenga.
             </p>
-            
-            <motion.button 
+
+            <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.97 }}
               onClick={() => navigate('/demo-barberia/turnos')}
@@ -359,7 +358,7 @@ const DemoBarberia = () => {
               Sacar turno ahora →
             </motion.button>
           </div>
-          
+
           {/* Decorative hint of light */}
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/5 rounded-full -mr-64 -mt-64 blur-3xl pointer-events-none" />
         </div>
@@ -375,16 +374,16 @@ const DemoBarberia = () => {
             Av. Alem 500, Bahía Blanca, Buenos Aires
           </p>
         </div>
-        
+
         <div className="max-w-7xl mx-auto px-4">
           <div className="w-full h-[500px] rounded-3xl overflow-hidden border border-gray-200 shadow-[0_12px_48px_rgba(0,0,0,0.08)] bg-white">
-            <iframe 
+            <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3144!2d-62.2689!3d-38.7183!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0!2zMzjCsDQzJzA2LjAiUyA2MsKwMTYnMDguMCJX!5e0!3m2!1ses!2sar!4v1234567890"
-              width="100%" 
-              height="100%" 
-              style={{ border: 0 }} 
-              allowFullScreen="" 
-              loading="lazy" 
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               title="Ubicación Barbería Monarca"
             ></iframe>
@@ -395,22 +394,22 @@ const DemoBarberia = () => {
       {/* MODAL AUTH */}
       <AnimatePresence>
         {authModalOpen && (
-          <motion.div 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setAuthModalOpen(false)}
             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4 transition-all"
           >
-            <motion.div 
-              initial={{ scale: 0.9, y: 20 }} 
-              animate={{ scale: 1, y: 0 }} 
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
               onClick={(e) => e.stopPropagation()}
               className="bg-white rounded-[2.5rem] w-full max-w-sm p-8 relative shadow-2xl overflow-hidden"
             >
               {/* BOTÓN CERRAR */}
-              <button 
+              <button
                 onClick={() => setAuthModalOpen(false)}
                 className="absolute top-6 right-6 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 hover:bg-gray-200 transition-colors z-10"
               >
@@ -419,13 +418,13 @@ const DemoBarberia = () => {
 
               {/* TABS */}
               <div className="flex gap-6 mb-8 border-b border-gray-100">
-                <button 
+                <button
                   onClick={() => { setAuthTab('login'); setPasswordValue(''); }}
                   className={`pb-3 text-sm font-bold transition-all border-b-2 ${authTab === 'login' ? 'text-yellow-700 border-yellow-700' : 'text-gray-400 border-transparent hover:text-gray-600'}`}
                 >
                   Iniciar sesión
                 </button>
-                <button 
+                <button
                   onClick={() => { setAuthTab('signup'); setPasswordValue(''); }}
                   className={`pb-3 text-sm font-bold transition-all border-b-2 ${authTab === 'signup' ? 'text-yellow-700 border-yellow-700' : 'text-gray-400 border-transparent hover:text-gray-600'}`}
                 >
@@ -434,8 +433,8 @@ const DemoBarberia = () => {
               </div>
 
               {authTab === 'login' ? (
-                <motion.div 
-                  initial={{ opacity: 0, x: -10 }} 
+                <motion.div
+                  initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   key="login-tab"
                 >
@@ -447,18 +446,18 @@ const DemoBarberia = () => {
                       <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Email</label>
                       <div className="relative">
                         <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300">✉️</span>
-                        <input 
+                        <input
                           type="email" placeholder="tu@email.com"
                           className="w-full pl-11 pr-4 py-3.5 bg-gray-50 border border-gray-100 rounded-2xl text-sm focus:border-yellow-700 focus:bg-white focus:outline-none transition-all"
                         />
                       </div>
                     </div>
-                    
+
                     <div className="space-y-1.5">
                       <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Contraseña</label>
                       <div className="relative">
                         <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300">🔒</span>
-                        <input 
+                        <input
                           type="password" placeholder="••••••••"
                           className="w-full pl-11 pr-4 py-3.5 bg-gray-50 border border-gray-100 rounded-2xl text-sm focus:border-yellow-700 focus:bg-white focus:outline-none transition-all"
                         />
@@ -466,8 +465,8 @@ const DemoBarberia = () => {
                     </div>
                   </div>
 
-                  <motion.button 
-                    whileHover={{ scale: 1.01 }} 
+                  <motion.button
+                    whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.98 }}
                     className="w-full bg-yellow-700 hover:bg-yellow-600 text-white font-bold py-4 rounded-2xl mt-8 shadow-lg shadow-yellow-900/20 transition-all font-['DM_Sans']"
                   >
@@ -480,8 +479,8 @@ const DemoBarberia = () => {
                   </p>
                 </motion.div>
               ) : (
-                <motion.div 
-                  initial={{ opacity: 0, x: 10 }} 
+                <motion.div
+                  initial={{ opacity: 0, x: 10 }}
                   animate={{ opacity: 1, x: 0 }}
                   key="signup-tab"
                 >
@@ -493,7 +492,7 @@ const DemoBarberia = () => {
                       <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Nombre completo *</label>
                       <div className="relative">
                         <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300">👤</span>
-                        <input 
+                        <input
                           type="text" placeholder="Juan Pérez"
                           className="w-full pl-11 pr-4 py-3.5 bg-gray-50 border border-gray-100 rounded-2xl text-sm focus:border-yellow-700 focus:bg-white focus:outline-none transition-all"
                         />
@@ -505,7 +504,7 @@ const DemoBarberia = () => {
                         <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Email *</label>
                         <div className="relative">
                           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[10px]">✉️</span>
-                          <input 
+                          <input
                             type="email" placeholder="tu@email.com"
                             className="w-full pl-8 pr-3 py-3 bg-gray-50 border border-gray-100 rounded-xl text-xs focus:border-yellow-700 focus:bg-white focus:outline-none transition-all"
                           />
@@ -515,7 +514,7 @@ const DemoBarberia = () => {
                         <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Teléfono *</label>
                         <div className="relative">
                           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[10px]">📱</span>
-                          <input 
+                          <input
                             type="tel" placeholder="2910123456"
                             className="w-full pl-8 pr-3 py-3 bg-gray-50 border border-gray-100 rounded-xl text-xs focus:border-yellow-700 focus:bg-white focus:outline-none transition-all"
                           />
@@ -528,7 +527,7 @@ const DemoBarberia = () => {
                         <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Contraseña *</label>
                         <div className="relative">
                           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[10px]">🔒</span>
-                          <input 
+                          <input
                             type="password" placeholder="••••••••"
                             value={passwordValue}
                             onChange={(e) => setPasswordValue(e.target.value)}
@@ -540,7 +539,7 @@ const DemoBarberia = () => {
                         <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Confirmar *</label>
                         <div className="relative">
                           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[10px]">🔒</span>
-                          <input 
+                          <input
                             type="password" placeholder="••••••••"
                             className="w-full pl-8 pr-3 py-3 bg-gray-50 border border-gray-100 rounded-xl text-xs focus:border-yellow-700 focus:bg-white focus:outline-none transition-all"
                           />
@@ -571,8 +570,8 @@ const DemoBarberia = () => {
                     )}
                   </div>
 
-                  <motion.button 
-                    whileHover={{ scale: 1.01 }} 
+                  <motion.button
+                    whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.98 }}
                     className="w-full bg-yellow-700 hover:bg-yellow-600 text-white font-bold py-4 rounded-2xl mt-8 shadow-lg shadow-yellow-900/20 transition-all font-['DM_Sans']"
                   >
@@ -593,7 +592,7 @@ const DemoBarberia = () => {
       {/* LIGHTBOX MODAL */}
       <AnimatePresence>
         {lightbox && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -601,7 +600,7 @@ const DemoBarberia = () => {
             className="fixed inset-0 z-[110] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4"
           >
             {/* Botón cerrar */}
-            <button 
+            <button
               className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-2xl flex items-center justify-center hover:bg-white/20 transition-colors z-[120]"
               onClick={() => setLightbox(null)}
             >
@@ -609,7 +608,7 @@ const DemoBarberia = () => {
             </button>
 
             {/* Imagen del Lightbox */}
-            <motion.img 
+            <motion.img
               initial={{ opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.85 }}
@@ -626,7 +625,7 @@ const DemoBarberia = () => {
       {/* BOTONES FLOTANTES CÍRCULOS */}
       <div className="hidden md:flex fixed right-6 bottom-8 flex-col gap-4 z-50">
         {/* Instagram */}
-        <motion.a 
+        <motion.a
           whileHover={{ scale: 1.08 }}
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -641,7 +640,7 @@ const DemoBarberia = () => {
         </motion.a>
 
         {/* WhatsApp */}
-        <motion.a 
+        <motion.a
           whileHover={{ scale: 1.08 }}
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -660,8 +659,8 @@ const DemoBarberia = () => {
       <footer className="w-full bg-[#FAF7F2] border-t border-[#E5E0D8] py-6 text-center">
         <p className="text-gray-400 text-xs tracking-wide">
           Sistema de turnos por{" "}
-          <a 
-            href="/" 
+          <a
+            href="/"
             className="text-blue-500 font-semibold hover:text-blue-600 transition-colors"
           >
             Agendoo
