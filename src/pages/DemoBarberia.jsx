@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { UserCircle } from 'lucide-react';
+import { UserCircle, Calendar, Images, ChevronDown, MapPin } from 'lucide-react';
 import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
 const DemoBarberia = () => {
@@ -12,6 +12,7 @@ const DemoBarberia = () => {
   const [passwordValue, setPasswordValue] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const [openSection, setOpenSection] = useState(null);
 
   const passwordReqs = {
     length: passwordValue.length >= 8,
@@ -181,6 +182,117 @@ const DemoBarberia = () => {
             </a>
           </div>
 
+          <div className="md:hidden mt-4 px-2">
+            <button 
+              onClick={() => navigate('/demo-barberia/turnos')}
+              className="flex items-center justify-center gap-2 w-full rounded-xl bg-[#2C1810] text-white py-4 font-['DM_Sans'] shadow-lg transition-transform active:scale-[0.98]"
+            >
+              <Calendar size={20} />
+              <span className="font-bold">Reservar turno</span>
+            </button>
+          </div>
+
+          {/* Botón Galería Colapsable - Mobile */}
+          <div className="md:hidden mt-4 px-2">
+            <button 
+              onClick={() => setOpenSection(openSection === 'galeria' ? null : 'galeria')}
+              className="flex items-center justify-between w-full rounded-xl border border-[#8B6914] bg-transparent text-[#2C1810] py-4 px-4 font-['DM_Sans'] transition-all active:scale-[0.98]"
+            >
+              <div className="flex items-center gap-2">
+                <Images size={20} />
+                <span className="font-bold">Galería</span>
+              </div>
+              <ChevronDown 
+                size={20} 
+                className={`transition-transform duration-300 ${openSection === 'galeria' ? 'rotate-180' : ''}`} 
+              />
+            </button>
+
+            <AnimatePresence>
+              {openSection === 'galeria' && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  className="overflow-hidden"
+                >
+                  <div className="pt-4 space-y-3">
+                    {/* Imagen Grande */}
+                    <div 
+                      onClick={() => setLightbox(images[0])}
+                      className="rounded-2xl overflow-hidden shadow-lg border border-gray-100 cursor-pointer"
+                    >
+                      <img 
+                        src={images[0]} 
+                        alt="Barber Shop Style"
+                        className="h-48 object-cover w-full"
+                      />
+                    </div>
+                    {/* Grid 2x2 */}
+                    <div className="grid grid-cols-2 gap-3">
+                      {images.slice(1).map((src, i) => (
+                        <div 
+                          key={i} 
+                          onClick={() => setLightbox(src)}
+                          className="rounded-2xl overflow-hidden shadow-md border border-gray-100 cursor-pointer"
+                        >
+                          <img 
+                            src={src} 
+                            alt={`Barber detail ${i}`}
+                            className="h-32 object-cover w-full"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Botón Mapa Colapsable - Mobile */}
+          <div className="md:hidden mt-4 px-2">
+            <button 
+              onClick={() => setOpenSection(openSection === 'mapa' ? null : 'mapa')}
+              className="flex items-center justify-between w-full rounded-xl border border-[#8B6914] bg-transparent text-[#2C1810] py-4 px-4 font-['DM_Sans'] transition-all active:scale-[0.98]"
+            >
+              <div className="flex items-center gap-2">
+                <MapPin size={20} />
+                <span className="font-bold">¿Cómo llegar?</span>
+              </div>
+              <ChevronDown 
+                size={20} 
+                className={`transition-transform duration-300 ${openSection === 'mapa' ? 'rotate-180' : ''}`} 
+              />
+            </button>
+
+            <AnimatePresence>
+              {openSection === 'mapa' && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  className="overflow-hidden"
+                >
+                  <div className="pt-4">
+                    <div className="w-full h-[400px] rounded-2xl overflow-hidden border border-gray-200 shadow-md bg-white">
+                      <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3144!2d-62.2689!3d-38.7183!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0!2zMzjCsDQzJzA2LjAiUyA2MsKwMTYnMDguMCJX!5e0!3m2!1ses!2sar!4v1234567890"
+                        width="100%" 
+                        height="100%" 
+                        style={{ border: 0 }} 
+                        allowFullScreen="" 
+                        loading="lazy" 
+                        referrerPolicy="no-referrer-when-downgrade"
+                        title="Ubicación Barbería Monarca Mobile"
+                      ></iframe>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
           <p className="hidden md:block mt-6 text-[#6B5744] text-lg leading-relaxed font-medium">
             Barbería tradicional con estilo. 
             Cortes clásicos y modernos, atención personalizada 
@@ -189,8 +301,8 @@ const DemoBarberia = () => {
         </div>
       </section>
 
-      {/* SECCIÓN 4 — GALERÍA DE CARDS */}
-      <section className="w-full max-w-none px-4 pb-0">
+      {/* SECCIÓN 4 — GALERÍA DE CARDS (Desktop) */}
+      <section className="hidden md:block w-full max-w-none px-4 pb-0">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 w-full">
           {/* Columna Izquierda — Imagen Alta */}
           <div className="col-span-1 md:row-span-2 h-full">
@@ -253,8 +365,8 @@ const DemoBarberia = () => {
         </div>
       </section>
 
-      {/* SECCIÓN 6 — GOOGLE MAPS COMO CARD */}
-      <section className="w-full bg-[#FAF7F2] pb-12">
+      {/* SECCIÓN 6 — GOOGLE MAPS COMO CARD (Desktop) */}
+      <section className="hidden md:block w-full bg-[#FAF7F2] pb-12">
         <div className="max-w-7xl mx-auto px-6 py-10">
           <h3 className="text-gray-900 font-semibold text-xl mb-1 flex items-center gap-2">
             <span>📍</span> Dónde encontrarnos
