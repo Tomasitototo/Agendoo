@@ -337,8 +337,8 @@ const DemoBarberia = () => {
         </div>
       </section>
 
-      {/* SECCIÓN 5 — CARD CTA TURNO */}
-      <section className="w-full px-4 pt-12 pb-12">
+      {/* SECCIÓN 5 — CARD CTA TURNO (Desktop) */}
+      <section className="hidden md:block w-full px-4 pt-12 pb-12">
         <div className="bg-[#2C1A0E] rounded-[2.5rem] p-12 lg:p-20 text-center shadow-2xl relative overflow-hidden border border-[#3D2515]">
           <div className="max-w-3xl mx-auto relative z-10">
             <h2 className="font-['Playfair_Display'] text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
