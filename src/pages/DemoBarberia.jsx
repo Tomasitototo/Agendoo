@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { UserCircle } from 'lucide-react';
+import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
 const DemoBarberia = () => {
   const navigate = useNavigate();
@@ -159,7 +160,28 @@ const DemoBarberia = () => {
             📍 Bahía Blanca, Buenos Aires
           </p>
 
-          <p className="mt-6 text-[#6B5744] text-lg leading-relaxed font-medium">
+          <div className="md:hidden mt-6 flex justify-center gap-4 px-2">
+            <a 
+              href="https://instagram.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center justify-center w-12 h-12 rounded-full bg-[#2C1810] text-white shadow-md transition-all hover:opacity-90 active:scale-95"
+              aria-label="Instagram"
+            >
+              <FaInstagram size={20} />
+            </a>
+            <a 
+              href="https://wa.me/5492914000000" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center justify-center w-12 h-12 rounded-full bg-[#2C1810] text-white shadow-md transition-all hover:opacity-90 active:scale-95"
+              aria-label="WhatsApp"
+            >
+              <FaWhatsapp size={20} />
+            </a>
+          </div>
+
+          <p className="hidden md:block mt-6 text-[#6B5744] text-lg leading-relaxed font-medium">
             Barbería tradicional con estilo. 
             Cortes clásicos y modernos, atención personalizada 
             y ambiente único en el corazón de Bahía Blanca.
