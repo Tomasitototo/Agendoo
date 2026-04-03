@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { UserCircle } from 'lucide-react';
+import { UserCircle, Calendar, ArrowLeft } from 'lucide-react';
 
 const BarberiaBooking = () => {
   const navigate = useNavigate();
@@ -134,6 +134,16 @@ const BarberiaBooking = () => {
       <section className="w-full max-w-none px-0">
         {/* Banner con Logo Superpuesto */}
         <div className="relative">
+          {/* Botón Volver - Fixed on Mobile */}
+          <div className="md:hidden fixed top-6 left-6 z-[60]">
+            <button
+              onClick={() => navigate('/demo-barberia')}
+              className="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-lg border border-black/5 active:scale-95 transition-transform"
+            >
+              <ArrowLeft size={24} color="#2C1810" />
+            </button>
+          </div>
+
           {/* Mobile Profile Icon - Fixed on Scroll */}
           <div className="md:hidden fixed top-6 right-6 z-[60]" ref={dropdownRef}>
             <button
