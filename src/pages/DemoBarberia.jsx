@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { UserCircle } from 'lucide-react';
 
 const DemoBarberia = () => {
   const navigate = useNavigate();
@@ -8,6 +9,8 @@ const DemoBarberia = () => {
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [authTab, setAuthTab] = useState('login'); // 'login' | 'signup'
   const [passwordValue, setPasswordValue] = useState('');
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   const passwordReqs = {
     length: passwordValue.length >= 8,
@@ -15,6 +18,16 @@ const DemoBarberia = () => {
     lower: /[a-z]/.test(passwordValue),
     number: /[0-9]/.test(passwordValue),
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const images = [
     "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1200",
@@ -27,19 +40,19 @@ const DemoBarberia = () => {
   return (
     <div className="min-h-screen font-['DM_Sans'] bg-[#FAF7F2] text-[#1A1A1A]">
       {/* SECCIÓN 1 — NAVBAR */}
-      <nav className="bg-[#2C1810] px-6 py-4 flex justify-between items-center sticky top-0 z-50 shadow-lg">
+      <nav className="bg-transparent md:bg-[#2C1810] px-6 py-4 flex justify-between items-center sticky top-0 z-50 shadow-none md:shadow-lg">
         <div className="flex items-center gap-3">
           <img 
             src="/logo-barberia.webp" 
             alt="Logo Barbería Monarca"
-            className="w-10 h-10 object-contain"
+            className="hidden md:block w-10 h-10 object-contain"
           />
-          <span className="text-white font-semibold text-lg font-['Playfair_Display'] tracking-wide underline decoration-yellow-800" onClick={() => navigate('/')}>
+          <span className="hidden md:block text-white font-semibold text-lg font-['Playfair_Display'] tracking-wide underline decoration-yellow-800" onClick={() => navigate('/')}>
             Barbería Monarca
           </span>
         </div>
         
-        <div className="flex gap-3">
+        <div className="hidden md:flex gap-3">
           <button 
             onClick={() => {
               setAuthTab('login');
@@ -55,6 +68,49 @@ const DemoBarberia = () => {
           >
             Reservar turno
           </button>
+        </div>
+
+        {/* Mobile Navbar Icons */}
+        <div className="md:hidden relative" ref={dropdownRef}>
+          <button 
+            onClick={() => setDropdownOpen(!dropdownOpen)}
+            className="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-sm"
+          >
+            <UserCircle size={24} color="#2C1810" />
+          </button>
+
+          <AnimatePresence>
+            {dropdownOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                className="absolute right-0 mt-2 w-48 bg-[#FAF7F2] rounded-xl shadow-md overflow-hidden z-50 overflow-hidden"
+                style={{ border: '1px solid rgba(44, 24, 16, 0.2)' }}
+              >
+                <button 
+                  onClick={() => {
+                    setAuthTab('login');
+                    setAuthModalOpen(true);
+                    setDropdownOpen(false);
+                  }}
+                  className="w-full text-left py-3 px-4 text-sm font-medium text-[#2C1810] hover:bg-[#2C1810]/5 transition-colors font-['DM_Sans']"
+                >
+                  Iniciar sesión
+                </button>
+                <button 
+                  onClick={() => {
+                    setAuthTab('signup');
+                    setAuthModalOpen(true);
+                    setDropdownOpen(false);
+                  }}
+                  className="w-full text-left py-3 px-4 text-sm font-medium text-[#2C1810] hover:bg-[#2C1810]/5 border-t border-[#2C1810]/10 transition-colors font-['DM_Sans']"
+                >
+                  Registrarse
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </nav>
 
@@ -434,7 +490,7 @@ const DemoBarberia = () => {
       </AnimatePresence>
 
       {/* BOTONES FLOTANTES CÍRCULOS */}
-      <div className="fixed right-6 bottom-8 flex flex-col gap-4 z-50">
+      <div className="hidden md:flex fixed right-6 bottom-8 flex-col gap-4 z-50">
         {/* Instagram */}
         <motion.a 
           whileHover={{ scale: 1.08 }}
