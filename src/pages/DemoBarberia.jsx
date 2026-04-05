@@ -42,36 +42,7 @@ const DemoBarberia = () => {
   return (
     <div className="min-h-screen font-['DM_Sans'] bg-[#FAF7F2] text-[#1A1A1A]">
       {/* SECCIÓN 1 — NAVBAR (Desktop - Hidden) */}
-      <nav className="hidden bg-[#2C1810] px-6 py-4 justify-between items-center sticky top-0 z-50 shadow-lg">
-        <div className="flex items-center gap-3">
-          <img
-            src="/logo-barberia.webp"
-            alt="Logo Barbería Monarca"
-            className="hidden md:block w-10 h-10 object-contain"
-          />
-          <span className="hidden md:block text-white font-semibold text-lg font-['Playfair_Display'] tracking-wide underline decoration-yellow-800" onClick={() => navigate('/')}>
-            Barbería Monarca
-          </span>
-        </div>
 
-        <div className="hidden md:flex gap-3">
-          <button
-            onClick={() => {
-              setAuthTab('login');
-              setAuthModalOpen(true);
-            }}
-            className="border border-white/30 text-white/80 rounded-full px-4 py-2 text-sm hover:bg-white/10 transition-colors"
-          >
-            Iniciar sesión
-          </button>
-          <button
-            onClick={() => navigate('/demo-barberia/turnos')}
-            className="bg-[#8B6914] text-white rounded-full px-4 py-2 text-sm font-semibold hover:bg-yellow-700 transition-colors shadow-lg shadow-yellow-900/20"
-          >
-            Reservar turno
-          </button>
-        </div>
-      </nav>
 
       {/* SECCIÓN 2 — PERFIL DE NEGOCIO (Estilo Inmersivo) */}
       <section className="w-full max-w-none px-0">

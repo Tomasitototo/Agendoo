@@ -93,31 +93,10 @@ const BeautyBooking = () => {
 
   return (
     <div className="min-h-screen font-['DM_Sans'] bg-[#FDF8F5] text-[#1A1A1A]">
-      {/* NAVBAR (Desktop Only Bar) */}
-      <nav className="hidden md:flex bg-[#1A1A1A] px-6 py-4 justify-between items-center sticky top-0 z-50 shadow-lg">
-        <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate('/demo-beauty')}>
-          <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm overflow-hidden p-1.5">
-            <img 
-              src="/LogoDemoBeauty.webp" 
-              alt="Logo"
-              className="w-full h-full object-contain"
-            />
-          </div>
-          <span className="text-white font-semibold text-lg font-['Cormorant_Garamond'] tracking-wide">Amara Beauty</span>
-        </div>
-        <div className="hidden md:flex gap-3">
-          <button 
-            onClick={() => { setAuthTab('login'); setAuthModalOpen(true); }}
-            className="border border-white/20 text-white/80 rounded-full px-4 py-2 text-sm hover:bg-white/10 transition-colors"
-          >
-            Iniciar sesión
-          </button>
-          <button onClick={() => setStep(1)} className="bg-[#C9847A] text-white rounded-full px-4 py-2 text-sm font-semibold hover:bg-[#b8736a] transition-colors shadow-lg shadow-[#C9847A]/20">Reservar turno</button>
-        </div>
-      </nav>
 
-      {/* IMMERSIVE NAVBAR ICONS (Mobile & Desktop Floating) */}
-      <div className="md:hidden fixed top-6 left-6 z-[60]">
+
+      {/* IMMERSIVE NAVBAR ICONS (Floating Buttons) */}
+      <div className="fixed top-6 left-6 z-[60]">
         <button 
           onClick={() => navigate('/demo-beauty')}
           className="flex items-center justify-center w-11 h-11 bg-white rounded-full shadow-lg border border-black/5 active:scale-95 transition-transform"
@@ -126,7 +105,7 @@ const BeautyBooking = () => {
         </button>
       </div>
 
-      <div className="md:hidden fixed top-6 right-6 z-[60]" ref={dropdownRef}>
+      <div className="fixed top-6 right-6 z-[60]" ref={dropdownRef}>
         <button 
           onClick={() => setDropdownOpen(!dropdownOpen)}
           className="flex items-center justify-center w-11 h-11 bg-white rounded-full shadow-lg border border-black/5 active:scale-95 transition-transform"
