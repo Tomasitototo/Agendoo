@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { UserCircle, Calendar, ArrowLeft } from 'lucide-react';
+import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
 const BeautyBooking = () => {
   const navigate = useNavigate();
@@ -18,6 +20,10 @@ const BeautyBooking = () => {
     notas: ''
   });
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authTab, setAuthTab] = useState('login');
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   // -- DATOS HARDCODEADOS --
   const horariosDisponibles = {
@@ -48,6 +54,16 @@ const BeautyBooking = () => {
     }
   }, [step, timeLeft]);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
@@ -77,8 +93,8 @@ const BeautyBooking = () => {
 
   return (
     <div className="min-h-screen font-['DM_Sans'] bg-[#FDF8F5] text-[#1A1A1A]">
-      {/* NAVBAR */}
-      <nav className="bg-[#1A1A1A] px-6 py-4 flex justify-between items-center sticky top-0 z-50 shadow-lg">
+      {/* NAVBAR (Desktop Only Bar) */}
+      <nav className="hidden md:flex bg-[#1A1A1A] px-6 py-4 justify-between items-center sticky top-0 z-50 shadow-lg">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate('/demo-beauty')}>
           <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm overflow-hidden p-1.5">
             <img 
@@ -89,16 +105,64 @@ const BeautyBooking = () => {
           </div>
           <span className="text-white font-semibold text-lg font-['Cormorant_Garamond'] tracking-wide">Amara Beauty</span>
         </div>
-        <div className="flex gap-3">
-          <button className="border border-white/20 text-white/80 rounded-full px-4 py-2 text-sm hover:bg-white/10 transition-colors">Iniciar sesión</button>
+        <div className="hidden md:flex gap-3">
+          <button 
+            onClick={() => { setAuthTab('login'); setAuthModalOpen(true); }}
+            className="border border-white/20 text-white/80 rounded-full px-4 py-2 text-sm hover:bg-white/10 transition-colors"
+          >
+            Iniciar sesión
+          </button>
           <button onClick={() => setStep(1)} className="bg-[#C9847A] text-white rounded-full px-4 py-2 text-sm font-semibold hover:bg-[#b8736a] transition-colors shadow-lg shadow-[#C9847A]/20">Reservar turno</button>
         </div>
       </nav>
 
+      {/* IMMERSIVE NAVBAR ICONS (Mobile & Desktop Floating) */}
+      <div className="md:hidden fixed top-6 left-6 z-[60]">
+        <button 
+          onClick={() => navigate('/demo-beauty')}
+          className="flex items-center justify-center w-11 h-11 bg-white rounded-full shadow-lg border border-black/5 active:scale-95 transition-transform"
+        >
+          <ArrowLeft size={24} color="#1A1A1A" />
+        </button>
+      </div>
+
+      <div className="md:hidden fixed top-6 right-6 z-[60]" ref={dropdownRef}>
+        <button 
+          onClick={() => setDropdownOpen(!dropdownOpen)}
+          className="flex items-center justify-center w-11 h-11 bg-white rounded-full shadow-lg border border-black/5 active:scale-95 transition-transform"
+        >
+          <UserCircle size={28} color="#1A1A1A" />
+        </button>
+
+        <AnimatePresence>
+          {dropdownOpen && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: -10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: -10 }}
+              className="absolute right-0 mt-2 w-48 bg-[#FDF8F5] rounded-2xl shadow-2xl overflow-hidden z-50 border border-[#1A1A1A]/20"
+            >
+              <button 
+                onClick={() => { setAuthTab('login'); setAuthModalOpen(true); setDropdownOpen(false); }}
+                className="w-full text-left py-4 px-5 text-sm font-bold text-[#1A1A1A] hover:bg-[#1A1A1A]/5 transition-colors font-['DM_Sans']"
+              >
+                Iniciar sesión
+              </button>
+              <button 
+                onClick={() => { setAuthTab('signup'); setAuthModalOpen(true); setDropdownOpen(false); }}
+                className="w-full text-left py-4 px-5 text-sm font-bold text-[#1A1A1A] hover:bg-[#1A1A1A]/5 border-t border-[#1A1A1A]/10 transition-colors font-['DM_Sans']"
+              >
+                Registrarse
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
       {/* HEADER */}
       <section className="w-full max-w-none px-0">
         <div className="relative">
-          <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1200" alt="Beauty Banner" className="w-full h-48 md:h-64 object-cover shadow-lg" />
+          <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1200" alt="Beauty Banner" className="w-full h-48 md:h-64 object-cover shadow-lg beauty-banner-booking" />
           <div className="max-w-3xl mx-auto px-6 relative">
             <div className="absolute -bottom-10 left-6 z-10">
               <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-white border-4 border-white shadow-2xl overflow-hidden flex items-center justify-center">
@@ -111,6 +175,14 @@ const BeautyBooking = () => {
             </div>
           </div>
         </div>
+        
+        {/* Banner Height Fix - Responsive */}
+        <style dangerouslySetInnerHTML={{ __html: `
+          @media (max-width: 768px) {
+            .beauty-banner-booking { height: 160px !important; }
+          }
+        `}} />
+        
         <div className="max-w-3xl mx-auto px-6 pt-16 pb-6 text-left">
           <h1 className="font-['Cormorant_Garamond'] font-bold text-4xl text-gray-900 italic">Amara Beauty</h1>
           <p className="mt-2 text-[#6B5744] text-xs md:text-sm italic">📍 Palermo, Buenos Aires</p>
@@ -282,6 +354,90 @@ const BeautyBooking = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* MODAL AUTH */}
+      <AnimatePresence>
+        {authModalOpen && (
+          <motion.div 
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            onClick={() => setAuthModalOpen(false)}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4 transition-all"
+          >
+            <motion.div 
+              initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-[2.5rem] w-full max-w-sm p-8 relative shadow-2xl overflow-hidden"
+            >
+              <button 
+                onClick={() => setAuthModalOpen(false)}
+                className="absolute top-6 right-6 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 hover:bg-gray-200 transition-colors z-10"
+              >✕</button>
+
+              <div className="flex gap-6 mb-8 border-b border-gray-100">
+                <button 
+                  onClick={() => { setAuthTab('login'); }}
+                  className={`pb-3 text-sm font-bold transition-all border-b-2 ${authTab === 'login' ? 'text-[#C9847A] border-[#C9847A]' : 'text-gray-400 border-transparent hover:text-gray-600'}`}
+                >Iniciar sesión</button>
+                <button 
+                  onClick={() => { setAuthTab('signup'); }}
+                  className={`pb-3 text-sm font-bold transition-all border-b-2 ${authTab === 'signup' ? 'text-[#C9847A] border-[#C9847A]' : 'text-gray-400 border-transparent hover:text-gray-600'}`}
+                >Registrarse</button>
+              </div>
+
+              {authTab === 'login' ? (
+                <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}>
+                  <h2 className="text-2xl font-bold text-gray-900 font-['Cormorant_Garamond'] italic mb-2">Bienvenido de nuevo</h2>
+                  <p className="text-[#6B5744] text-xs mb-8">Ingresá tus credenciales para continuar.</p>
+                  <div className="space-y-4">
+                    <input type="email" placeholder="tu@email.com" className="w-full px-4 py-3.5 bg-gray-50 border border-gray-100 rounded-2xl text-sm focus:border-[#C9847A] focus:outline-none transition-all" />
+                    <input type="password" placeholder="••••••••" className="w-full px-4 py-3.5 bg-gray-50 border border-gray-100 rounded-2xl text-sm focus:border-[#C9847A] focus:outline-none transition-all" />
+                  </div>
+                  <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="w-full bg-[#C9847A] hover:bg-[#b8736a] text-white font-bold py-4 rounded-2xl mt-8 shadow-lg shadow-[#C9847A]/20 transition-all font-['DM_Sans']">Iniciar sesión</motion.button>
+                </motion.div>
+              ) : (
+                <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }}>
+                  <h2 className="text-2xl font-bold text-gray-900 font-['Cormorant_Garamond'] italic mb-2">Crear cuenta</h2>
+                  <p className="text-[#6B5744] text-xs mb-8">Completá tus datos para empezar.</p>
+                  <div className="space-y-4">
+                    <input type="text" placeholder="Juan Pérez" className="w-full px-4 py-3.5 bg-gray-50 border border-gray-100 rounded-2xl text-sm focus:border-[#C9847A] focus:outline-none transition-all" />
+                    <div className="grid grid-cols-2 gap-3">
+                      <input type="email" placeholder="Email" className="w-full px-3 py-3 bg-gray-50 border border-gray-100 rounded-xl text-xs focus:border-[#C9847A] focus:outline-none transition-all" />
+                      <input type="tel" placeholder="Teléfono" className="w-full px-3 py-3 bg-gray-50 border border-gray-100 rounded-xl text-xs focus:border-[#C9847A] focus:outline-none transition-all" />
+                    </div>
+                    <input type="password" placeholder="Contraseña" className="w-full px-4 py-3.5 bg-gray-50 border border-gray-100 rounded-2xl text-sm focus:border-[#C9847A] focus:outline-none transition-all" />
+                  </div>
+                  <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="w-full bg-[#C9847A] hover:bg-[#b8736a] text-white font-bold py-4 rounded-2xl mt-8 shadow-lg shadow-[#C9847A]/20 transition-all font-['DM_Sans']">Crear cuenta</motion.button>
+                </motion.div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* BOTONES FLOTANTES CÍRCULOS (Desktop Only) */}
+      <div className="hidden md:flex fixed right-6 bottom-8 flex-col gap-4 z-50">
+        {/* Instagram */}
+        <motion.a 
+          whileHover={{ scale: 1.08 }}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          href="https://instagram.com" target="_blank" rel="noopener noreferrer"
+          className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-200 bg-[#1A1A1A]"
+        >
+          <FaInstagram size={20} className="text-[#C9847A]" />
+        </motion.a>
+        {/* WhatsApp */}
+        <motion.a 
+          whileHover={{ scale: 1.08 }}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.1 }}
+          href="https://wa.me/5492914000000" target="_blank" rel="noopener noreferrer"
+          className="w-12 h-12 rounded-full flex items-center justify-center text-white bg-[#C9847A] shadow-lg transition-all duration-200"
+        >
+          <FaWhatsapp size={20} />
+        </motion.a>
+      </div>
     </div>
   );
 };
