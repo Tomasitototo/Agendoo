@@ -122,7 +122,7 @@ const DemoBeauty = () => {
             {/* A) Redes Sociales */}
             <div className="flex justify-center gap-4">
               <a
-                href="https://instagram.com" target="_blank" rel="noopener noreferrer"
+                href="https://www.instagram.com/agendoo.ok/" target="_blank" rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full flex items-center justify-center bg-[#1A1A1A] text-white shadow-sm transition-transform active:scale-90"
               >
                 <FaInstagram size={20} />
@@ -400,7 +400,7 @@ const DemoBeauty = () => {
           whileHover={{ scale: 1.08 }}
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          href="https://instagram.com" target="_blank" rel="noopener noreferrer"
+          href="https://www.instagram.com/agendoo.ok/" target="_blank" rel="noopener noreferrer"
           className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-200 bg-[#1A1A1A]"
         >
           <FaInstagram size={20} className="text-[#C9847A]" />

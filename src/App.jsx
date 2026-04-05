@@ -237,6 +237,7 @@ const CTASection = () => {
 };
 
 const LandingPage = () => {
+  const [activeTab, setActiveTab] = useState('sin');
   useEffect(() => {
     const sectionId = sessionStorage.getItem('scrollTo')
     if (sectionId) {
@@ -339,22 +340,37 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
-      {/* SECCIÓN COMPARATIVA */}
-      <section id="sin-vs-con" className="bg-[#FFFFFF] py-20">
-        <div className="max-w-5xl mx-auto px-6">
-          <h2 className="text-center font-extrabold text-4xl lg:text-5xl text-gray-900 mb-12" style={{ fontFamily: "'Sora', sans-serif" }}>
+      <section id="sin-vs-con" className="bg-[#FFFFFF] py-20 px-6">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-center font-extrabold text-4xl lg:text-5xl text-gray-900 mb-8 md:mb-12" style={{ fontFamily: "'Sora', sans-serif" }}>
             Sin Agendoo vs. <span className="text-[#1B72F0]">Con Agendoo</span>
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Toggle Mobile */}
+          <div className="md:hidden flex justify-center mb-10">
+            <div className="bg-[#F3F4F6] p-1 rounded-full inline-flex font-['DM_Sans'] shadow-sm">
+              <button 
+                onClick={() => setActiveTab('sin')}
+                className={`py-2 px-6 rounded-full text-sm font-bold transition-all duration-300 ${activeTab === 'sin' ? 'bg-[#2B6BFF] text-white shadow-md' : 'text-[#6B7280]'}`}
+              >
+                Sin Agendoo
+              </button>
+              <button 
+                onClick={() => setActiveTab('con')}
+                className={`py-2 px-6 rounded-full text-sm font-bold transition-all duration-300 ${activeTab === 'con' ? 'bg-[#2B6BFF] text-white shadow-md' : 'text-[#6B7280]'}`}
+              >
+                Con Agendoo
+              </button>
+            </div>
+          </div>
 
-            {/* CARD SIN AGENDOO */}
+          {/* Versión Desktop: Grid 2 Columnas */}
+          <div className="hidden md:grid grid-cols-2 gap-6">
+            {/* CARD SIN AGENDOO (Desktop) */}
             <div className="bg-gray-100 border border-gray-200 rounded-3xl p-8">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center text-red-500">
-                  ✕
-                </div>
-                <h3 className="font-bold text-lg text-gray-700">Sin Agendoo</h3>
+                <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center text-red-500 font-bold">✕</div>
+                <h3 className="font-bold text-lg text-gray-700 font-['Sora']">Sin Agendoo</h3>
               </div>
               <ul className="space-y-4">
                 {[
@@ -372,13 +388,11 @@ const LandingPage = () => {
               </ul>
             </div>
 
-            {/* CARD CON AGENDOO */}
-            <div className="bg-[#1B72F0] rounded-3xl p-8">
+            {/* CARD CON AGENDOO (Desktop) */}
+            <div className="bg-[#1B72F0] rounded-3xl p-8 shadow-xl shadow-blue-900/10 active:scale-[0.99] transition-transform">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-white">
-                  ✓
-                </div>
-                <h3 className="font-bold text-lg text-white">Con Agendoo</h3>
+                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-white">✓</div>
+                <h3 className="font-bold text-lg text-white font-['Sora']">Con Agendoo</h3>
               </div>
               <ul className="space-y-4">
                 {[
@@ -395,7 +409,64 @@ const LandingPage = () => {
                 ))}
               </ul>
             </div>
+          </div>
 
+          {/* Versión Mobile: Toggle + Animación */}
+          <div className="md:hidden relative overflow-hidden min-h-[360px]">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={activeTab}
+                initial={{ x: activeTab === 'con' ? 40 : -40, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: activeTab === 'con' ? -40 : 40, opacity: 0 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                className="w-full h-full"
+              >
+                {activeTab === 'sin' ? (
+                  <div className="bg-gray-100 border border-gray-200 rounded-3xl p-8">
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center text-red-500 font-bold">✕</div>
+                      <h3 className="font-bold text-lg text-gray-700 font-['Sora']">Sin Agendoo</h3>
+                    </div>
+                    <ul className="space-y-4">
+                      {[
+                        "Confirmás turnos uno por uno por WhatsApp",
+                        "3 de cada 10 clientes no aparecen",
+                        "10+ mensajes de WhatsApp para responder dudas",
+                        "No sabés cuánto ganaste este mes",
+                        "Agendas en papel o en la cabeza"
+                      ].map((item, index) => (
+                        <li key={index} className="flex items-start gap-3">
+                          <span className="text-red-400 text-lg mt-0.5 shrink-0">✕</span>
+                          <span className="text-gray-500 text-base">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : (
+                  <div className="bg-[#1B72F0] rounded-3xl p-8 shadow-xl shadow-blue-900/10 h-full">
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-white font-bold">✓</div>
+                      <h3 className="font-bold text-lg text-white font-['Sora']">Con Agendoo</h3>
+                    </div>
+                    <ul className="space-y-4">
+                      {[
+                        "Tus clientes reservan solos, a cualquier hora",
+                        "Cobro de seña automático = Sin ausencias",
+                        "Gráficos y métricas con tus ingresos en tiempo real",
+                        "Calendario digital en tiempo real",
+                        "Te olvidás de contestar por WhatsApp e Instagram"
+                      ].map((item, index) => (
+                        <li key={index} className="flex items-start gap-3">
+                          <span className="text-white/70 text-lg mt-0.5 shrink-0">✓</span>
+                          <span className="text-white/90 text-base">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </section>

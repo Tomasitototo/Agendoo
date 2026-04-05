@@ -162,7 +162,7 @@ const DemoBarberia = () => {
 
           <div className="md:hidden mt-6 flex justify-center gap-4 px-2">
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/agendoo.ok/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center w-12 h-12 rounded-full bg-[#2C1810] text-white shadow-md transition-all hover:opacity-90 active:scale-95"
@@ -629,7 +629,7 @@ const DemoBarberia = () => {
           whileHover={{ scale: 1.08 }}
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          href="https://www.instagram.com/synapse.ok/"
+          href="https://www.instagram.com/agendoo.ok/"
           target="_blank"
           rel="noopener noreferrer"
           className="w-12 h-12 rounded-full flex items-center justify-center shadow-[0_4px_16px_rgba(0,0,0,0.2)] transition-all duration-200 bg-[#2C1810]"

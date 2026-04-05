@@ -62,29 +62,24 @@ const PricingSection = () => {
         </p>
 
         {/* TOGGLE MENSUAL / ANUAL */}
-        <div className="flex justify-center items-center gap-4 mb-12 relative z-10">
-          <span className={`font-semibold transition-colors duration-200 ${!isAnnual ? "text-white" : "text-white/70"}`}>Mensual</span>
-          <button
-            className="w-16 h-8 flex items-center bg-white/20 rounded-full p-1 cursor-pointer outline-none"
-            onClick={() => setIsAnnual(!isAnnual)}>
-            <motion.div
-              className="w-6 h-6 bg-white rounded-full shadow-sm"
-              animate={{ x: isAnnual ? 32 : 0 }}
-              transition={{ type: "spring", stiffness: 500, damping: 30 }}
-            />
-          </button>
-          <span className={`relative font-semibold flex items-center transition-colors duration-200 ${isAnnual ? "text-white" : "text-white/70"}`}>
-            Anual
-            {isAnnual && (
-              <motion.span
-                initial={{ opacity: 0, x: -20, y: "-50%" }}
-                animate={{ opacity: 1, x: 0, y: "-50%" }}
-                className="absolute left-[calc(100%+8px)] top-1/2 bg-green-400 text-green-900 text-xs font-bold rounded-full px-2 py-0.5 whitespace-nowrap"
-              >
+        <div className="flex justify-center mb-12 relative z-10">
+          <div className="bg-[#0f4dbd] p-1 rounded-full inline-flex font-['DM_Sans'] shadow-inner border border-white/10">
+            <button 
+              onClick={() => setIsAnnual(false)}
+              className={`py-2 px-6 rounded-full text-sm font-bold transition-all duration-300 ${!isAnnual ? 'bg-white text-[#1B72F0] shadow-md' : 'text-white/70 hover:text-white'}`}
+            >
+              Mensual
+            </button>
+            <button 
+              onClick={() => setIsAnnual(true)}
+              className={`py-2 px-6 rounded-full text-sm font-bold transition-all duration-300 flex items-center gap-2 ${isAnnual ? 'bg-white text-[#1B72F0] shadow-md' : 'text-white/70 hover:text-white'}`}
+            >
+              Anual
+              <span className="bg-[#22C55E] text-white text-[10px] font-black rounded-full px-2 py-0.5 shadow-sm">
                 Ahorrá 15%
-              </motion.span>
-            )}
-          </span>
+              </span>
+            </button>
+          </div>
         </div>
 
         {/* GRID DE CARDS */}

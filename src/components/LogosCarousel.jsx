@@ -10,11 +10,12 @@ const imgWhatsApp = "/Whatsapp Logo.webp";
 const imgInstagram = "/Instagram Logo.webp";
 const imgCalendar = "/Calendar Logo.webp";
 const imgOpenAI = "/OpenAI Logo.webp";
+const imgGemini = "/Gemini Logo.webp";
 const imgGmail = "/Gmail Logo.webp";
 
 export const LogosCarousel = ({
   title = "Funciona con las herramientas que ya usás",
-  logoCount = 6,
+  logoCount = 7,
   autoPlay = true,
   autoPlayInterval = 2000,
   logos = [
@@ -23,7 +24,8 @@ export const LogosCarousel = ({
     { id: "logo-3", description: "Instagram",    image: imgInstagram },
     { id: "logo-4", description: "Google Calendar", image: imgCalendar },
     { id: "logo-5", description: "OpenAI",       image: imgOpenAI },
-    { id: "logo-6", description: "Gmail",        image: imgGmail },
+    { id: "logo-6", description: "Gemini",       image: imgGemini },
+    { id: "logo-7", description: "Gmail",        image: imgGmail },
   ],
   containerClassName = "",
   titleClassName = "text-base md:text-lg font-medium text-gray-500 uppercase tracking-[0.2em] my-0 mb-12 text-center",
@@ -42,6 +44,33 @@ export const LogosCarousel = ({
   logoMaxHeight = "max-h-[50px] md:max-h-[70px]",
 }) => {
   const [api, setApi] = useState();
+
+  useEffect(() => {
+    if (!api) return;
+
+    const autoScroll = api.plugins().autoScroll;
+    if (!autoScroll) return;
+
+    // Pause on user interaction (drag start)
+    const onPointerDown = () => {
+      autoScroll.stop();
+    };
+
+    // Resume when interaction ends and carousel settles at a snap point
+    const onSettle = () => {
+      if (!autoScroll.isPlaying()) {
+        autoScroll.play();
+      }
+    };
+
+    api.on("pointerDown", onPointerDown);
+    api.on("settle", onSettle);
+
+    return () => {
+      api.off("pointerDown", onPointerDown);
+      api.off("settle", onSettle);
+    };
+  }, [api]);
 
   const baseLogos = logos || Array.from(
     { length: logoCount },
@@ -66,7 +95,7 @@ export const LogosCarousel = ({
             <Carousel 
               setApi={setApi} 
               opts={{ dragFree: true, loop: true }}
-              plugins={[AutoScroll({ playOnInit: true, speed: 1 })]}
+              plugins={[AutoScroll({ playOnInit: true, speed: 1, stopOnInteraction: false, stopOnMouseEnter: true })]}
               className={`w-full ${carouselClassName}`}>
               <CarouselContent>
                 {logoItems.map((logo, index) => (
