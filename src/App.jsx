@@ -496,7 +496,7 @@ const LandingPage = () => {
                   badgeText: "Estilo urbano",
                   title: "Demo Barbería",
                   image: "/demos/preview-barberia.webp",
-                  mobileImage: "/demos/demo-barberia-mobile.png",
+                  mobileImage: "/demos/demo-barberia-mobile.webp",
                   placeholderCss: "from-gray-800 to-gray-900",
                   href: "/demo-barberia"
                 },
@@ -504,7 +504,7 @@ const LandingPage = () => {
                   badgeText: "Estética & Lash",
                   title: "Demo Beauty",
                   image: "/demos/preview-beauty.webp",
-                  mobileImage: "/demos/demo-beauty-mobile.png",
+                  mobileImage: "/demos/demo-beauty-mobile.webp",
                   placeholderCss: "from-pink-900 to-gray-900",
                   href: "/demo-beauty"
                 }
@@ -531,11 +531,11 @@ const LandingPage = () => {
                     onError={(e) => e.target.style.display = 'none'}
                   />
 
-                  {/* CAPA 2 — Overlay degradado (solo desktop) */}
-                  <div className="hidden md:block absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                  {/* CAPA 2 — Overlay degradado (mobile + desktop) */}
+                  <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
-                  {/* CAPA 3 — Contenido (solo desktop) */}
-                  <div className="hidden md:flex absolute bottom-0 left-0 right-0 p-6 justify-between items-end z-20">
+                  {/* CAPA 3 — Contenido (mobile + desktop) */}
+                  <div className="flex absolute bottom-0 left-0 right-0 p-6 justify-between items-end z-20">
 
                     {/* Lado izquierdo */}
                     <div>
@@ -547,8 +547,8 @@ const LandingPage = () => {
                       </h3>
                     </div>
 
-                    {/* Lado derecho */}
-                    <div>
+                    {/* Lado derecho — solo desktop */}
+                    <div className="hidden md:flex">
                       <div className="bg-white text-gray-900 rounded-full px-5 py-2 font-semibold text-sm flex items-center gap-2 hover:bg-blue-50 transition-colors">
                         Ver demo <span aria-hidden="true">&rarr;</span>
                       </div>
