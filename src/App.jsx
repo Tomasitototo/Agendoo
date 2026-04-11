@@ -95,18 +95,32 @@ const FAQSection = () => {
   return (
     <section id="faq" className="bg-[#FFFFFF] py-20 px-6">
       <div className="max-w-2xl mx-auto">
-        <h2 className="text-center font-extrabold text-4xl lg:text-5xl text-gray-900 mb-2" style={{ fontFamily: "'Sora', sans-serif" }}>
-          Preguntas <span className="font-light italic text-[#1B72F0]">frecuentes</span>
-        </h2>
-        <p className="text-center text-gray-400 text-base mb-12">
-          Si no está tu pregunta, escribinos por WhatsApp.
-        </p>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <h2 className="text-center font-extrabold text-4xl lg:text-5xl text-gray-900 mb-2" style={{ fontFamily: "'Sora', sans-serif" }}>
+            Preguntas <span className="font-light italic text-[#1B72F0]">frecuentes</span>
+          </h2>
+          <p className="text-center text-gray-400 text-base mb-12">
+            Si no está tu pregunta, escribinos por WhatsApp.
+          </p>
+        </motion.div>
 
         <div className="space-y-3">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
-              <div key={index} className="border border-gray-200 rounded-2xl overflow-hidden">
+              <motion.div
+                key={index}
+                className="border border-gray-200 rounded-2xl overflow-hidden"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.08 }}
+                viewport={{ once: true, amount: 0.2 }}
+              >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : index)}
                   className="w-full text-left flex justify-between items-center px-6 py-4 bg-white hover:bg-gray-50 transition-colors cursor-pointer"
@@ -137,7 +151,7 @@ const FAQSection = () => {
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
+              </motion.div>
             );
           })}
         </div>
@@ -186,7 +200,13 @@ const TestimonialsSection = () => {
 const CTASection = () => {
   return (
     <section id="comenzar" className="bg-[#FFFFFF] py-20 px-6">
-      <div className="max-w-6xl mx-auto">
+      <motion.div
+        className="max-w-6xl mx-auto"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        viewport={{ once: true, amount: 0.2 }}
+      >
         <AnimatedCard index={0} className="relative overflow-hidden rounded-3xl p-16 lg:p-20 text-center" style={{ background: "linear-gradient(135deg, #1B72F0 0%, #0d5fd4 100%)" }}>
 
           {/* Círculo decorativo izquierdo */}
@@ -231,7 +251,7 @@ const CTASection = () => {
           </div>
 
         </AnimatedCard>
-      </div>
+      </motion.div>
     </section>
   );
 };
@@ -342,9 +362,16 @@ const LandingPage = () => {
       </section>
       <section id="sin-vs-con" className="bg-[#FFFFFF] py-20 px-6">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-center font-extrabold text-4xl lg:text-5xl text-gray-900 mb-8 md:mb-12" style={{ fontFamily: "'Sora', sans-serif" }}>
-            Sin Agendoo vs. <span className="text-[#1B72F0]">Con Agendoo</span>
-          </h2>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            <h2 className="text-center font-extrabold text-4xl lg:text-5xl text-gray-900 mb-8 md:mb-12" style={{ fontFamily: "'Sora', sans-serif" }}>
+              Sin Agendoo vs. <span className="text-[#1B72F0]">Con Agendoo</span>
+            </h2>
+          </motion.div>
 
           {/* Toggle Mobile */}
           <div className="md:hidden flex justify-center mb-10">
@@ -367,7 +394,13 @@ const LandingPage = () => {
           {/* Versión Desktop: Grid 2 Columnas */}
           <div className="hidden md:grid grid-cols-2 gap-6">
             {/* CARD SIN AGENDOO (Desktop) */}
-            <div className="bg-gray-100 border border-gray-200 rounded-3xl p-8">
+            <motion.div
+              className="bg-gray-100 border border-gray-200 rounded-3xl p-8"
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              viewport={{ once: true, amount: 0.2 }}
+            >
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center text-red-500 font-bold">✕</div>
                 <h3 className="font-bold text-lg text-gray-700 font-['Sora']">Sin Agendoo</h3>
@@ -386,10 +419,16 @@ const LandingPage = () => {
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
 
             {/* CARD CON AGENDOO (Desktop) */}
-            <div className="bg-[#1B72F0] rounded-3xl p-8 shadow-xl shadow-blue-900/10 active:scale-[0.99] transition-transform">
+            <motion.div
+              className="bg-[#1B72F0] rounded-3xl p-8 shadow-xl shadow-blue-900/10 active:scale-[0.99] transition-transform"
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              viewport={{ once: true, amount: 0.2 }}
+            >
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-white">✓</div>
                 <h3 className="font-bold text-lg text-white font-['Sora']">Con Agendoo</h3>
@@ -408,7 +447,7 @@ const LandingPage = () => {
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
           </div>
 
           {/* Versión Mobile: Toggle + Animación */}
@@ -481,12 +520,19 @@ const LandingPage = () => {
                 <span>🖥️</span>
                 <span>Demos en vivo</span>
               </div>
-              <h2 className="font-extrabold text-4xl lg:text-5xl text-gray-900 mb-2" style={{ fontFamily: "'Sora', sans-serif" }}>
-                Así podría verse tu sistema
-              </h2>
-              <p className="text-gray-400 text-base max-w-xl">
-                Elegí una demo y visualizá cómo quedaría tu negocio con un sistema listo para reservar.
-              </p>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.2 }}
+              >
+                <h2 className="font-extrabold text-4xl lg:text-5xl text-gray-900 mb-2" style={{ fontFamily: "'Sora', sans-serif" }}>
+                  Así podría verse tu sistema
+                </h2>
+                <p className="text-gray-400 text-base max-w-xl">
+                  Elegí una demo y visualizá cómo quedaría tu negocio con un sistema listo para reservar.
+                </p>
+              </motion.div>
             </div>
 
             {/* GRID DE CARDS DE DEMOS */}
@@ -509,10 +555,16 @@ const LandingPage = () => {
                   href: "/demo-beauty"
                 }
               ].map((demo, index) => (
-                <a
+                <motion.div
                   key={index}
+                  initial={{ opacity: 0, x: index === 0 ? -40 : 40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.1 + 0.1 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                >
+                <a
                   href={demo.href}
-                  className="relative overflow-hidden rounded-3xl md:h-80 cursor-pointer group hover:scale-[1.02] hover:shadow-xl transition-all duration-300 bg-gray-100"
+                  className="relative overflow-hidden rounded-3xl md:h-80 cursor-pointer group hover:scale-[1.02] hover:shadow-xl transition-all duration-300 bg-gray-100 block"
                 >
                   {/* IMAGEN MOBILE (visible solo en mobile) */}
                   <img
@@ -556,6 +608,7 @@ const LandingPage = () => {
 
                   </div>
                 </a>
+                </motion.div>
               ))}
             </div>
 

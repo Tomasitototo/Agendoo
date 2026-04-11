@@ -53,13 +53,20 @@ const PricingSection = () => {
     <section id="precios" className="bg-[#1B72F0] py-24 relative overflow-x-hidden max-w-full w-full">
       <BackgroundEffects />
       <div className="max-w-5xl mx-auto px-6 relative z-10 w-full max-w-full">
-        <h2 className="text-center font-extrabold text-4xl lg:text-5xl text-white mb-2" style={{ fontFamily: "'Sora', sans-serif" }}>
-          Precios claros <br className="hidden sm:block" />
-          <span className="font-light italic">sin letra chica</span>
-        </h2>
-        <p className="text-center text-white/70 text-base mb-10">
-          Sin comisiones. Tu facturación es 100% tuya.
-        </p>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <h2 className="text-center font-extrabold text-4xl lg:text-5xl text-white mb-2" style={{ fontFamily: "'Sora', sans-serif" }}>
+            Precios claros <br className="hidden sm:block" />
+            <span className="font-light italic">sin letra chica</span>
+          </h2>
+          <p className="text-center text-white/70 text-base mb-10">
+            Sin comisiones. Tu facturación es 100% tuya.
+          </p>
+        </motion.div>
 
         {/* TOGGLE MENSUAL / ANUAL */}
         <div className="flex justify-center mb-12 relative z-10">
@@ -86,6 +93,12 @@ const PricingSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch max-w-4xl mx-auto">
 
           {/* CARD BÁSICO */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
+            viewport={{ once: true, amount: 0.2 }}
+          >
           <AnimatedCard index={0} className="max-w-md w-full mx-auto bg-white/10 border border-white/20 backdrop-blur-sm rounded-3xl p-8 text-white flex flex-col h-full">
             <div className="self-start bg-white/15 border border-white/20 rounded-full px-3 py-1 text-xs font-semibold text-white mb-4">
               BÁSICO
@@ -135,8 +148,15 @@ const PricingSection = () => {
               Comenzar ahora
             </motion.a>
           </AnimatedCard>
+          </motion.div>
 
           {/* CARD PREMIUM */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
+            viewport={{ once: true, amount: 0.2 }}
+          >
           <AnimatedCard index={1} className="relative max-w-md w-full mx-auto bg-white rounded-3xl p-8 text-gray-900 shadow-[0_25px_60px_rgba(0,0,0,0.25)] flex flex-col h-full">
             <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-yellow-400 text-yellow-900 rounded-full px-4 py-1 text-xs font-bold uppercase tracking-wider flex items-center gap-1 whitespace-nowrap shadow-[0_2px_8px_rgba(0,0,0,0.15)]">
               <span>⭐</span> EL FAVORITO DE LOS NEGOCIOS
@@ -190,6 +210,7 @@ const PricingSection = () => {
               Comenzar ahora
             </motion.a>
           </AnimatedCard>
+          </motion.div>
 
         </div>
 
