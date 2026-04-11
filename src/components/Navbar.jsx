@@ -1,4 +1,28 @@
 import React, { useState, useEffect } from "react";
+
+const navbarStyles = `
+  .btn-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-shimmer::before {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 120%;
+    background-color: rgba(255,255,255,0.2);
+    top: 50%;
+    transform: skewX(30deg) translate(-150%, -50%);
+    transition: all 0.5s;
+  }
+  .btn-shimmer:hover::before {
+    transform: skewX(30deg) translate(150%, -50%);
+    transition-delay: 0.1s;
+  }
+  .btn-shimmer:active {
+    transform: scale(0.95);
+  }
+`;
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useHashNavigation } from "../hooks/useHashNavigation";
@@ -20,6 +44,7 @@ export const Navbar = ({ isFloating = false }) => {
 
   return (
     <nav id="main-navbar" className={navClasses}>
+      <style>{navbarStyles}</style>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         <button onClick={() => goToSection('hero')} className="flex items-center space-x-2 focus:outline-none cursor-pointer">
           {!logoError && (
@@ -97,7 +122,7 @@ export const Navbar = ({ isFloating = false }) => {
           <button onClick={() => goToSection('demos')} className="text-gray-600 hover:text-[#1B72F0] transition-colors cursor-pointer outline-none">Demos</button>
           <button onClick={() => goToSection('precios')} className="text-gray-600 hover:text-[#1B72F0] transition-colors cursor-pointer outline-none">Precios</button>
           <button onClick={() => goToSection('faq')} className="text-gray-600 hover:text-[#1B72F0] transition-colors cursor-pointer outline-none">FAQ</button>
-          <button onClick={() => goToSection('comenzar')} className="ml-4 bg-[#1B72F0] text-white px-5 py-2.5 rounded-xl hover:bg-[#155ec9] transition-all shadow-md hover:shadow-lg active:scale-95 cursor-pointer outline-none">
+          <button onClick={() => goToSection('comenzar')} className="ml-4 bg-[#1B72F0] text-white px-5 py-2.5 rounded-xl hover:bg-[#155ec9] transition-all shadow-md hover:shadow-lg cursor-pointer outline-none btn-shimmer">
             Comenzar ahora
           </button>
         </div>
@@ -183,7 +208,7 @@ export const Navbar = ({ isFloating = false }) => {
             </div>
             <button 
               onClick={() => { goToSection('comenzar'); setOpen(false); }}
-              className="mt-4 bg-[#1B72F0] text-white font-bold px-10 py-4 rounded-full text-lg shadow-xl shadow-blue-100 hover:bg-[#155ec9] active:scale-95 transition-all text-center cursor-pointer outline-none" 
+              className="mt-4 bg-[#1B72F0] text-white font-bold px-10 py-4 rounded-full text-lg shadow-xl shadow-blue-100 hover:bg-[#155ec9] transition-all text-center cursor-pointer outline-none btn-shimmer"
             >
               Comenzar ahora
             </button>

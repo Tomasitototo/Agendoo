@@ -563,7 +563,9 @@ const LandingPage = () => {
         </div>
       </section>
 
+      {/* TESTIMONIALS — oculto temporalmente, reactivar quitando el comentario
       <TestimonialsSection />
+      */}
       <Suspense fallback={null}>
         <PricingSection />
       </Suspense>
