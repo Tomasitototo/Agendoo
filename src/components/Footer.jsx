@@ -53,8 +53,12 @@ export const Footer = () => {
         </h1>
         
         {/* LÍNEA FINAL */}
-        <div className="absolute bottom-4 w-full text-center text-white/20 text-xs z-20">
-          © 2025 Agendoo. Todos los derechos reservados.
+        <div className="absolute bottom-4 w-full flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-6 text-white/30 text-xs z-20">
+          <span>© 2026 Agendoo. Todos los derechos reservados.</span>
+          <div className="flex items-center gap-4">
+            <a href="/terminos" className="hover:text-white transition-colors">Términos y condiciones</a>
+            <a href="/privacidad" className="hover:text-white transition-colors">Política de Privacidad</a>
+          </div>
         </div>
       </div>
     </footer>

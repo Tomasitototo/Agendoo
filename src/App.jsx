@@ -9,6 +9,8 @@ import DemoBeauty from "./pages/DemoBeauty";
 import BeautyBooking from "./pages/BeautyBooking";
 import AgenteMateo from "./pages/AgenteMateo";
 import AgenteSofia from "./pages/AgenteSofia";
+import Terminos from "./pages/Terminos";
+import Privacidad from "./pages/Privacidad";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 
@@ -657,6 +659,8 @@ const App = () => {
         <Route path="/demo-beauty/turnos" element={<BeautyBooking />} />
         <Route path="/agente-mateo" element={<AgenteMateo />} />
         <Route path="/agente-sofia" element={<AgenteSofia />} />
+        <Route path="/terminos" element={<Terminos />} />
+        <Route path="/privacidad" element={<Privacidad />} />
       </Routes>
     </BrowserRouter>
   );
