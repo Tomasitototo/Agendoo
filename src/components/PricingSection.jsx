@@ -103,10 +103,19 @@ const PricingSection = () => {
             <div className="self-start bg-white/15 border border-white/20 rounded-full px-3 py-1 text-xs font-semibold text-white mb-4">
               BÁSICO
             </div>
-            <div className="text-white/60 text-sm mb-1">USD $400 setup único</div>
+            {/* Setup price */}
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-white/40 text-sm line-through">USD $400 setup</span>
+            </div>
+            <div className="text-white font-bold text-sm mb-2">USD $200 setup único</div>
+
+            {/* Monthly price */}
             <div className="text-5xl font-extrabold text-white">
               $<Counter from={!isAnnual ? 34 : 40} to={isAnnual ? 34 : 40} /> <span className="text-2xl font-normal text-white/60">/mes</span>
             </div>
+            {isAnnual && (
+              <div className="text-white/50 text-xs mt-1">Total a pagar: USD $408/año</div>
+            )}
             <p className="text-white/60 text-sm leading-relaxed mt-2 mb-4">
               Ideal para quienes recién arrancan o quieren probar la herramienta.
             </p>
@@ -145,7 +154,7 @@ const PricingSection = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.95 }}
               className="w-full py-3 rounded-2xl text-center font-semibold bg-white/15 border border-white/30 text-white hover:bg-white/25 transition-all duration-200 mt-auto">
-              Comenzar ahora
+              Prueba gratis de 30 días
             </motion.a>
           </AnimatedCard>
           </motion.div>
@@ -164,10 +173,19 @@ const PricingSection = () => {
             <div className="self-start bg-blue-600 text-white rounded-full px-3 py-1 text-xs font-semibold mb-4">
               PREMIUM
             </div>
-            <div className="text-gray-400 text-sm mb-1">USD $600 setup único</div>
+            {/* Setup price */}
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-gray-400 text-sm line-through">USD $600 setup</span>
+            </div>
+            <div className="text-gray-700 font-bold text-sm mb-2">USD $350 setup único</div>
+
+            {/* Monthly price */}
             <div className="text-5xl font-extrabold text-gray-900">
               $<Counter from={!isAnnual ? 60 : 70} to={isAnnual ? 60 : 70} /> <span className="text-2xl font-normal text-gray-400">/mes</span>
             </div>
+            {isAnnual && (
+              <div className="text-gray-400 text-xs mt-1">Total a pagar: USD $672/año</div>
+            )}
             <p className="text-gray-400 text-sm leading-relaxed mt-2 mb-4">
               Perfecto para profesionales o negocios que quieren destacarse.
             </p>
@@ -207,7 +225,7 @@ const PricingSection = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.95 }}
               className="w-full py-3 rounded-2xl text-center font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-all duration-200 mt-auto">
-              Comenzar ahora
+              Prueba gratis de 30 días
             </motion.a>
           </AnimatedCard>
           </motion.div>
