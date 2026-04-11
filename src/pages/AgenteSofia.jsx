@@ -68,7 +68,13 @@ const AgenteSofia = () => {
       {/* SECCIÓN 1 — RECORDATORIOS */}
       <section className="py-20 px-6">
         <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-          <div className="text-left">
+          <motion.div
+            className="text-left"
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <div className="bg-purple-50 border border-purple-100 rounded-full px-3 py-1 text-[10px] text-purple-600 inline-block mb-3 font-bold uppercase tracking-widest">
               🔔 RECORDATORIO AUTOMÁTICO
             </div>
@@ -91,10 +97,16 @@ const AgenteSofia = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* WhatsApp Mockup 1 */}
-          <div className="bg-[#111827] rounded-[2.5rem] p-6 border border-white/5 shadow-2xl relative">
+          <motion.div
+            className="bg-[#111827] rounded-[2.5rem] p-6 border border-white/5 shadow-2xl relative"
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <div className="flex items-center gap-3 mb-6">
               <div className="w-9 h-9 rounded-full bg-purple-600 flex items-center justify-center text-sm font-bold text-white shadow-lg">
                 S
@@ -120,7 +132,7 @@ const AgenteSofia = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -128,7 +140,13 @@ const AgenteSofia = () => {
       <section className="py-24 px-6 bg-[#FFFFFF]">
         <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
           {/* WhatsApp Mockup 2 */}
-          <div className="bg-[#111827] rounded-[2.5rem] p-6 border border-gray-100/10 shadow-2xl lg:order-1">
+          <motion.div
+            className="bg-[#111827] rounded-[2.5rem] p-6 border border-gray-100/10 shadow-2xl lg:order-1"
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <div className="flex items-center gap-3 mb-6">
               <div className="w-9 h-9 rounded-full bg-purple-600 flex items-center justify-center text-sm font-bold text-white shadow-lg">
                 S
@@ -159,9 +177,15 @@ const AgenteSofia = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="text-left lg:order-2">
+          <motion.div
+            className="text-left lg:order-2"
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <div className="bg-purple-50 border border-purple-100 rounded-full px-3 py-1 text-xs text-purple-600 inline-block mb-4 font-semibold uppercase tracking-wider">
               ⭐ Feedback automático
             </div>
@@ -171,16 +195,23 @@ const AgenteSofia = () => {
             <p className="text-gray-500 text-lg leading-relaxed">
               Cuando termina el turno, Sofía le escribe al cliente para saber cómo estuvo. Vos recibís el feedback sin pedirlo ni buscarlo.
             </p>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* FEATURES GRID */}
       <section className="py-20 px-6">
         <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12" style={{ fontFamily: "'Sora', sans-serif" }}>
-            Todo lo que hace Sofía
-          </h2>
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            <h2 className="text-3xl font-bold text-gray-900 mb-12" style={{ fontFamily: "'Sora', sans-serif" }}>
+              Todo lo que hace Sofía
+            </h2>
+          </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { icon: "🔔", title: "Recordatorio 24hs", desc: "Avisa automáticamente antes de cada turno." },
@@ -190,11 +221,18 @@ const AgenteSofia = () => {
               { icon: "📊", title: "Resultados en tu panel", desc: "Ves el feedback de cada cliente." },
               { icon: "⚡", title: "100% automático", desc: "No necesita configuración diaria." }
             ].map((feature, i) => (
-              <div key={i} className="bg-white border border-gray-200 rounded-2xl p-6 text-left shadow-sm hover:shadow-md transition-all cursor-default">
+              <motion.div
+                key={i}
+                className="bg-white border border-gray-200 rounded-2xl p-6 text-left shadow-sm hover:shadow-md transition-all cursor-default"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.1 }}
+                viewport={{ once: true, amount: 0.2 }}
+              >
                 <div className="text-2xl mb-3">{feature.icon}</div>
                 <h3 className="font-bold text-gray-900 text-base mb-1">{feature.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{feature.desc}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -202,7 +240,13 @@ const AgenteSofia = () => {
 
       {/* CTA FINAL */}
       <section className="py-24 px-6 text-center bg-[#FFFFFF]">
-        <div className="max-w-3xl mx-auto">
+        <motion.div
+          className="max-w-3xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.2 }}
+        >
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-8" style={{ fontFamily: "'Sora', sans-serif" }}>
             Sofía trabaja mientras vos descansás.
           </h2>
@@ -212,7 +256,7 @@ const AgenteSofia = () => {
           >
             Quiero a Sofía en mi negocio →
           </a>
-        </div>
+        </motion.div>
       </section>
 
       <Footer />
