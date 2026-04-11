@@ -67,9 +67,16 @@ const AgenteMateo = () => {
       {/* CHANNELS ANIMATION SECTION */}
       <section className="pt-12 pb-24 bg-[#FFFFFF] overflow-hidden relative">
         <div className="max-w-4xl mx-auto px-6 relative z-10">
-          <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 text-center max-w-4xl mx-auto mb-20 leading-tight" style={{ fontFamily: "'Sora', sans-serif" }}>
-            El agente que responde mientras vos trabajás. 24/7.
-          </h2>
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 text-center max-w-4xl mx-auto mb-20 leading-tight" style={{ fontFamily: "'Sora', sans-serif" }}>
+              El agente que responde mientras vos trabajás. 24/7.
+            </h2>
+          </motion.div>
 
           <div className="relative h-[520px] flex items-center justify-center">
             {/* LOGOS AT TOP - Coordinate-aligned for perfect line centering */}
@@ -83,8 +90,9 @@ const AgenteMateo = () => {
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: logo.delay }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.1 }}
+                  viewport={{ once: true, amount: 0.2 }}
                   className="absolute w-14 h-14 rounded-full bg-white border border-gray-100 flex items-center justify-center shadow-[0_4px_16px_rgba(0,0,0,0.08)] p-3"
                   style={{ left: `${(logo.x / 800) * 100}%`, transform: "translateX(-50%)" }}
                 >
@@ -230,13 +238,15 @@ const AgenteMateo = () => {
               <motion.div
                 key={idx}
                 className={`absolute ${card.pos} bg-white border border-gray-200 rounded-[24px] px-5 py-4 min-w-[190px] hidden sm:flex items-center gap-4 shadow-[0_8px_32px_rgba(0,0,0,0.08)]`}
-                style={{ zIndex: card.z, opacity: card.opacity || 1 }}
+                style={{ zIndex: card.z }}
+                initial={{ opacity: 0, x: card.pos.includes('left') ? -30 : 30 }}
+                whileInView={{ opacity: card.opacity ?? 1, x: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
                 animate={{ y: [0, -10, 0] }}
                 transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  delay: idx * 0.5,
-                  ease: "easeInOut"
+                  y: { duration: 3, repeat: Infinity, delay: idx * 0.5, ease: "easeInOut" },
+                  opacity: { duration: 0.5, ease: "easeOut", delay: 0.3 },
+                  x: { duration: 0.5, ease: "easeOut", delay: 0.3 }
                 }}
               >
                 <div className="text-3xl">{card.icon}</div>
@@ -249,7 +259,13 @@ const AgenteMateo = () => {
           </div>
 
           {/* STATS BELOW */}
-          <div className="mt-16 grid grid-cols-3 gap-8 text-center max-w-2xl mx-auto border-t border-gray-100 pt-12">
+          <motion.div
+            className="mt-16 grid grid-cols-3 gap-8 text-center max-w-2xl mx-auto border-t border-gray-100 pt-12"
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
+            viewport={{ once: true, amount: 0.2 }}
+          >
             {[
               { val: "24/7", lbl: "Disponible siempre" },
               { val: "<5seg", lbl: "Tiempo de respuesta" },
@@ -260,7 +276,7 @@ const AgenteMateo = () => {
                 <div className="text-gray-400 text-xs sm:text-sm uppercase tracking-wider">{stat.lbl}</div>
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* Background glow for the section removed */}
@@ -269,7 +285,13 @@ const AgenteMateo = () => {
       {/* SECCIÓN 1 — RESPUESTAS INMEDIATAS */}
       <section className="py-20 px-6 bg-[#FFFFFF]">
         <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-          <div className="text-left">
+          <motion.div
+            className="text-left"
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <div className="bg-blue-50 border border-blue-100 rounded-full px-3 py-1 text-xs text-blue-600 inline-block mb-4 font-semibold uppercase tracking-wider">
               💬 Respuestas al instante
             </div>
@@ -279,10 +301,16 @@ const AgenteMateo = () => {
             <p className="text-gray-500 text-lg leading-relaxed">
               Mateo responde en segundos, las 24 horas, los 7 días. Consultas de horarios, precios y disponibilidad, todo resuelto sin que vos estés al teléfono.
             </p>
-          </div>
+          </motion.div>
 
           {/* WhatsApp Mockup 1 */}
-          <div className="bg-[#111827] rounded-[2.5rem] p-6 border border-gray-100/10 shadow-2xl relative">
+          <motion.div
+            className="bg-[#111827] rounded-[2.5rem] p-6 border border-gray-100/10 shadow-2xl relative"
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <div className="flex items-center gap-3 mb-6">
               <div className="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center text-sm font-bold text-white shadow-lg">
                 M
@@ -318,7 +346,7 @@ const AgenteMateo = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -326,7 +354,13 @@ const AgenteMateo = () => {
       <section className="py-24 px-6 bg-[#FFFFFF]">
         <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
           {/* WhatsApp Mockup 2 */}
-          <div className="bg-[#111827] rounded-[2.5rem] p-6 border border-gray-100/10 shadow-2xl lg:order-1">
+          <motion.div
+            className="bg-[#111827] rounded-[2.5rem] p-6 border border-gray-100/10 shadow-2xl lg:order-1"
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <div className="flex items-center gap-3 mb-6">
               <div className="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center text-sm font-bold text-white">
                 M
@@ -356,9 +390,15 @@ const AgenteMateo = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="text-left lg:order-2">
+          <motion.div
+            className="text-left lg:order-2"
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <div className="bg-blue-50 border border-blue-100 rounded-full px-3 py-1 text-xs text-blue-600 inline-block mb-4 font-semibold uppercase tracking-wider">
               🔄 Gestión completa
             </div>
@@ -368,16 +408,23 @@ const AgenteMateo = () => {
             <p className="text-gray-500 text-lg leading-relaxed">
               Cuando un cliente necesita cambiar algo, Mateo lo resuelve solo. Verifica disponibilidad, propone horarios y confirma el cambio. Todo registrado.
             </p>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* SECCIÓN 3 — FEATURES GRID */}
       <section className="py-20 px-6 bg-[#FFFFFF]">
         <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12" style={{ fontFamily: "'Sora', sans-serif" }}>
-            Todo lo que hace Mateo
-          </h2>
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            <h2 className="text-3xl font-bold text-gray-900 mb-12" style={{ fontFamily: "'Sora', sans-serif" }}>
+              Todo lo que hace Mateo
+            </h2>
+          </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { icon: "📅", title: "Agenda turnos", desc: "Verifica disponibilidad y confirma en segundos." },
@@ -387,11 +434,18 @@ const AgenteMateo = () => {
               { icon: "💬", title: "Panel de chats", desc: "Ves todas las conversaciones en tiempo real." },
               { icon: "🖐️", title: "Modo manual", desc: "Tomás el control cuando querés vos." }
             ].map((feature, i) => (
-              <div key={i} className="bg-white border border-gray-200 rounded-2xl p-6 text-left shadow-sm hover:shadow-md transition-all cursor-default group">
+              <motion.div
+                key={i}
+                className="bg-white border border-gray-200 rounded-2xl p-6 text-left shadow-sm hover:shadow-md transition-all cursor-default group"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.1 }}
+                viewport={{ once: true, amount: 0.2 }}
+              >
                 <div className="text-3xl mb-3 group-hover:scale-110 transition-transform inline-block">{feature.icon}</div>
                 <h3 className="font-bold text-gray-900 text-base mb-1">{feature.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{feature.desc}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -399,7 +453,13 @@ const AgenteMateo = () => {
 
       {/* CTA FINAL */}
       <section className="py-24 px-6 text-center bg-[#FFFFFF]">
-        <div className="max-w-3xl mx-auto">
+        <motion.div
+          className="max-w-3xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.2 }}
+        >
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-8" style={{ fontFamily: "'Sora', sans-serif" }}>
             Mateo trabaja mientras vos atendés.
           </h2>
@@ -409,7 +469,7 @@ const AgenteMateo = () => {
           >
             Quiero a Mateo en mi negocio →
           </a>
-        </div>
+        </motion.div>
       </section>
 
       <Footer />
