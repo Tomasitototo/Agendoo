@@ -73,7 +73,7 @@ const AgenteMateo = () => {
 
           <div className="relative h-[520px] flex items-center justify-center">
             {/* LOGOS AT TOP - Coordinate-aligned for perfect line centering */}
-            <div className="absolute top-[-80px] left-0 w-full h-14 z-20">
+            <div className="absolute top-[-80px] left-0 w-full h-14 z-20 icons-mobile-offset">
               {[
                 { x: 135, src: "/LogoAgente1.webp", alt: "Instagram", delay: 0 },
                 { x: 300, src: "/LogoAgente2.webp", alt: "WhatsApp", delay: 0.2 },
@@ -427,6 +427,11 @@ const AgenteMateo = () => {
             linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
           mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
           -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+        }
+        @media (max-width: 767px) {
+          .icons-mobile-offset {
+            transform: translateX(-20px);
+          }
         }
       `}} />
     </div>
