@@ -496,6 +496,7 @@ const LandingPage = () => {
                   badgeText: "Estilo urbano",
                   title: "Demo Barbería",
                   image: "/demos/preview-barberia.webp",
+                  mobileImage: "/demos/demo-barberia-mobile.png",
                   placeholderCss: "from-gray-800 to-gray-900",
                   href: "/demo-barberia"
                 },
@@ -503,6 +504,7 @@ const LandingPage = () => {
                   badgeText: "Estética & Lash",
                   title: "Demo Beauty",
                   image: "/demos/preview-beauty.webp",
+                  mobileImage: "/demos/demo-beauty-mobile.png",
                   placeholderCss: "from-pink-900 to-gray-900",
                   href: "/demo-beauty"
                 }
@@ -510,21 +512,30 @@ const LandingPage = () => {
                 <a
                   key={index}
                   href={demo.href}
-                  className="relative overflow-hidden rounded-3xl h-80 cursor-pointer group hover:scale-[1.02] hover:shadow-xl transition-all duration-300 bg-gray-100"
+                  className="relative overflow-hidden rounded-3xl md:h-80 cursor-pointer group hover:scale-[1.02] hover:shadow-xl transition-all duration-300 bg-gray-100"
                 >
-                  {/* CAPA 1 — Imagen de fondo */}
+                  {/* IMAGEN MOBILE (visible solo en mobile) */}
                   <img
-                    src={demo.image}
+                    src={demo.mobileImage}
                     alt={demo.title}
-                    className="absolute inset-0 w-full h-full object-cover z-0 opacity-100 transition-opacity duration-300"
+                    className="md:hidden w-full object-cover rounded-3xl"
+                    style={{ aspectRatio: '9/16' }}
                     onError={(e) => e.target.style.display = 'none'}
                   />
 
-                  {/* CAPA 2 — Overlay degradado (más sutil) */}
-                  <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                  {/* CAPA 1 — Imagen de fondo (solo desktop) */}
+                  <img
+                    src={demo.image}
+                    alt={demo.title}
+                    className="hidden md:block absolute inset-0 w-full h-full object-cover z-0 opacity-100 transition-opacity duration-300"
+                    onError={(e) => e.target.style.display = 'none'}
+                  />
 
-                  {/* CAPA 3 — Contenido */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6 flex justify-between items-end z-20">
+                  {/* CAPA 2 — Overlay degradado (solo desktop) */}
+                  <div className="hidden md:block absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+
+                  {/* CAPA 3 — Contenido (solo desktop) */}
+                  <div className="hidden md:flex absolute bottom-0 left-0 right-0 p-6 justify-between items-end z-20">
 
                     {/* Lado izquierdo */}
                     <div>
